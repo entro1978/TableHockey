@@ -1,8 +1,0 @@
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Release\TableHockeyData.dll.config
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Release\TableHockeyData.dll
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Release\TableHockeyData.pdb
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\obj\Release\TableHockeyData.csprojResolveAssemblyReference.cache
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\obj\Release\TableHockeyData.dll
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\obj\Release\TableHockeyData.pdb
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Release\EntityFramework.dll
-C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Release\EntityFramework.xml
