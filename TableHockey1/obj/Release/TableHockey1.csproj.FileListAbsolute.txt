@@ -10,3 +10,5 @@ C:\TFS\TableHockey2012\TableHockey\TableHockey1\bin\Facebook.xml
 C:\TFS\TableHockey2012\TableHockey\TableHockey1\obj\Release\TableHockey1.csprojResolveAssemblyReference.cache
 C:\TFS\TableHockey2012\TableHockey\TableHockey1\obj\Release\TableHockey1.dll
 C:\TFS\TableHockey2012\TableHockey\TableHockey1\obj\Release\TableHockey1.pdb
+C:\TFS\TableHockey2012\TableHockey\TableHockey1\bin\EntityFramework.dll
+C:\TFS\TableHockey2012\TableHockey\TableHockey1\bin\EntityFramework.xml
