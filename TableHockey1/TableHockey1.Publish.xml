@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\inetpub\wwwroot\UHSSTableHockey" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="uc/ucCalendar.ascx" publishTime="02/01/2012 16:00:56" />
+    <file relUrl="bin/TableHockeyData.pdb" publishTime="03/18/2013 13:29:39" />
+    <file relUrl="pgEditContest.aspx" publishTime="03/13/2013 10:26:04" />
+    <file relUrl="uc/ucEditPlayer.ascx" publishTime="02/07/2012 14:27:36" />
+    <file relUrl="pgLogOut.aspx" publishTime="03/13/2013 10:26:04" />
+    <file relUrl="images/img01.jpg" publishTime="07/04/2010 00:01:32" />
+    <file relUrl="Web.config" publishTime="03/14/2013 12:30:13" />
+    <file relUrl="bin/TableHockeyData.dll" publishTime="03/18/2013 13:29:39" />
+    <file relUrl="Site.Master" publishTime="03/18/2013 09:19:15" />
+    <file relUrl="Account/EMailPassword.aspx" publishTime="03/14/2013 11:46:19" />
+    <file relUrl="uc/ucFileUpload.ascx" publishTime="04/28/2012 22:32:48" />
+    <file relUrl="pgEditClub.aspx" publishTime="03/18/2013 11:03:27" />
+    <file relUrl="Account/Web.config" publishTime="03/13/2013 14:27:47" />
+    <file relUrl="bin/TableHockey1.pdb" publishTime="03/18/2013 13:33:40" />
+    <file relUrl="uc/ucContestTable.ascx" publishTime="04/28/2012 21:23:36" />
+    <file relUrl="Account/Login.aspx" publishTime="03/13/2013 10:34:15" />
+    <file relUrl="packages.config" publishTime="02/03/2012 10:20:56" />
+    <file relUrl="pgContestSummary.aspx" publishTime="03/15/2013 12:59:02" />
+    <file relUrl="bin/AutoMapper.xml" publishTime="02/03/2012 10:20:54" />
+    <file relUrl="bin/TableHockey1.dll" publishTime="03/18/2013 13:33:40" />
+    <file relUrl="bin/AutoMapper.dll" publishTime="02/03/2012 10:20:54" />
+    <file relUrl="Register.aspx" publishTime="03/13/2013 10:26:04" />
+    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="03/13/2013 10:34:38" />
+    <file relUrl="pgEditContestTable.aspx" publishTime="03/13/2013 10:26:04" />
+    <file relUrl="Account/Register.aspx" publishTime="03/13/2013 10:34:22" />
+    <file relUrl="pgEditContestPlayers.aspx" publishTime="03/13/2013 10:26:04" />
+    <file relUrl="pgEditPlayer.aspx" publishTime="03/18/2013 12:30:38" />
+    <file relUrl="Account/ChangePassword.aspx" publishTime="03/13/2013 10:34:42" />
+    <file relUrl="uc/ucEditTableHockeyContest.ascx" publishTime="02/03/2012 10:36:32" />
+    <file relUrl="pgMain.aspx" publishTime="03/18/2013 12:12:03" />
+    <file relUrl="images/Calendar.png" publishTime="02/01/2012 16:24:12" />
+    <file relUrl="ImageHandler.ashx" publishTime="02/07/2012 14:27:36" />
+    <file relUrl="images/uhss.gif" publishTime="07/03/2010 23:50:48" />
+    <file relUrl="uc/ucContestRound.ascx" publishTime="03/11/2013 15:18:26" />
+    <file relUrl="uc/ucHandleSong.ascx" publishTime="04/28/2012 22:41:00" />
+    <file relUrl="uc/ucEditClub.ascx" publishTime="03/18/2013 11:18:16" />
+    <file relUrl="styles/Styles.css" publishTime="03/14/2013 13:39:59" />
+  </publishProfile>
+</publishData>

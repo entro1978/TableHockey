@@ -1,0 +1,5 @@
+C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Debug\TableHockeyData.dll.config
+C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Debug\TableHockeyData.dll
+C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\bin\Debug\TableHockeyData.pdb
+C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\obj\Debug\TableHockeyData.dll
+C:\TFS\TableHockey2012\TableHockey\ClassLibrary1\obj\Debug\TableHockeyData.pdb
