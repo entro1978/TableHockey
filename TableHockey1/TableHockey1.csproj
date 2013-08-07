@@ -58,8 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EO.Pdf">
-      <HintPath>..\..\..\..\Program Files (x86)\Essential Objects\EO.Total 2013\EO.Pdf.dll</HintPath>
+    <Reference Include="EO.Pdf, Version=4.0.68.2, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EO.Pdf.2012.4.0.68.2\lib\EO.Pdf.dll</HintPath>
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\packages\Facebook.6.4.2\lib\net40-client\Facebook.dll</HintPath>
