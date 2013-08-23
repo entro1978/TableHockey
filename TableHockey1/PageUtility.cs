@@ -95,15 +95,10 @@ namespace TableHockey
 
         public static int highestExponentLessThanOrEqualToSum(int i_nBase, int i_nSum)
         {
-            double m_nOut = 1;
-            double m_nSum = 0;
-
-            while (m_nSum <= i_nSum)
-            {
-                m_nSum = Math.Pow(i_nBase,m_nOut);
-                m_nOut += 1.0;
-            }
-            return (int)m_nOut;
+            int iCount;
+            for (iCount = 1; Math.Pow(i_nBase, iCount) <= i_nSum; iCount++)
+            { }
+            return (int)Math.Pow(i_nBase, iCount-1);
         }
 
         #endregion
