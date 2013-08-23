@@ -168,7 +168,7 @@ input.textEntry {width: 320px;border: 1px solid #ccc;}
 
 input.passwordEntry {width: 320px;border: 1px solid #ccc;}
 
-div.accountInfo {width: 42%;}
+div.accountInfo {width: auto;}
 
 /* MISC  
 ----------------------------------------------------------*/
