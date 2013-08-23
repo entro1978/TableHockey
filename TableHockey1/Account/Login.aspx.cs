@@ -34,7 +34,10 @@ namespace TableHockey
             foreach (TableHockeyContest m_contest in m_lstTableHockeyContest)
                 m_lstContestVm.Add(new TableHockeyContestViewModel(m_contest));
 
-            this.ucViewContests_public1.InitControl(m_lstContestVm);
+            if ((m_lstContestVm != null) && (m_lstContestVm.Count > 0))
+                this.ucViewContests_public1.InitControl(m_lstContestVm);
+            else
+                this.divInfo.Visible = false;
         }
 
 

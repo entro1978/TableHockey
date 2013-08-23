@@ -42,6 +42,7 @@
                                 <asp:CheckBox ID="RememberMe" runat="server" />
                                 <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
                             </p>
+                              &nbsp;
                         </fieldset>
                         <p class="submitButton">
                             <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="LoginUserValidationGroup" />
@@ -49,8 +50,9 @@
                     </div>
                 </LayoutTemplate>
             </asp:Login>
+          
         </div>
-        <div class="info" style="float: left; margin-left: 100px;">
+        <div id="divInfo" runat="server" class="info" style="float: left; margin-left: 100px;">
             <uc1:ucViewContests_public ID="ucViewContests_public1" runat="server" />
         </div>
     </div>
