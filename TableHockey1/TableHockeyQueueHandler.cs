@@ -25,7 +25,8 @@ namespace TableHockey
             m_nNumberOfPlayers = i_dictRankedPlayerId.Count;
             m_nNumberOfGamesPerRound = i_nNumberOfGamesPerRound;
             m_nNumberOfRounds = i_nNumberOfRounds;
-            int m_nNumberOfEvenRounds = PageUtility.isOdd(m_nNumberOfRounds) ? (m_nNumberOfRounds - 1) : m_nNumberOfRounds;
+            bool m_bEliminationRound = (PageUtility.highestExponentLessThanOrEqualToSum(2, m_nNumberOfPlayers) != m_nNumberOfPlayers); 
+            int m_nNumberOfEvenRounds = m_bEliminationRound ? (m_nNumberOfRounds - 1) : m_nNumberOfRounds;
             //Build end game tree, starting with lowest ranked players..
 
             //First, find out if there are players that do not fit into an end game tree.

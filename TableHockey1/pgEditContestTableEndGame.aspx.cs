@@ -180,7 +180,7 @@ namespace TableHockey
             //Determine and return number of rounds. If uneven number of players with respect to even end game pairs, add elimination rund.
 
             int m_nHighestEvenPairs = PageUtility.highestExponentLessThanOrEqualToSum(2, m_nPlayerCount);
-            int m_nNumberOfEvenRounds = Convert.ToInt32(0.5 * m_nHighestEvenPairs);
+            int m_nNumberOfEvenRounds = Convert.ToInt32(0.5 * m_nHighestEvenPairs) - 1;
             return ((m_nPlayerCount - m_nHighestEvenPairs) == 0) ? m_nNumberOfEvenRounds : 1 + m_nNumberOfEvenRounds;
         }
 
