@@ -9,7 +9,7 @@ using TableHockey;
 
 namespace TableHockey
 {
-    public partial class pgEditContestPlayers : PageUtility
+    public partial class pgEditContestPlayers : CheckAuth
     {
         protected int m_nContestId;
 

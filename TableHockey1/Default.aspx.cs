@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TableHockey
 {
-    public partial class Register : PageUtility
+    public partial class Default : PageUtility
     {
         protected void Page_Load(object sender, EventArgs e)
         {

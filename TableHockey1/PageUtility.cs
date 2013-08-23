@@ -45,8 +45,8 @@ namespace TableHockey
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["CurrentUser"] = Page.User.Identity.Name;
-            if (String.IsNullOrEmpty(m_sUser) || !Page.User.Identity.IsAuthenticated)
-                Response.Redirect("~/Account/Login.aspx");
+            //if (String.IsNullOrEmpty(m_sUser) || !Page.User.Identity.IsAuthenticated)
+            //    Response.Redirect("~/Account/Login.aspx");
         }
 
         # region Email

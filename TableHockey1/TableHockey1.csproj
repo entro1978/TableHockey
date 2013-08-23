@@ -91,10 +91,13 @@
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\EMailPassword.aspx" />
+    <Content Include="Account\Info.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="images\Calendar.png" />
     <Content Include="images\share.jpg" />
+    <Content Include="images\TableHockey2.jpg" />
+    <Content Include="images\TableHockey3.jpg" />
     <Content Include="pgContestSummary.aspx" />
     <Content Include="pgEditClub.aspx" />
     <Content Include="pgEditContestTableEndGame.aspx" />
@@ -103,7 +106,7 @@
     <Content Include="pgEditPlayer.aspx" />
     <Content Include="pgLogOut.aspx" />
     <Content Include="pgMain.aspx" />
-    <Content Include="Register.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="uc\ucCalendar.ascx" />
     <Content Include="uc\ucContestRound.ascx" />
     <Content Include="uc\ucContestTable.ascx" />
@@ -114,6 +117,7 @@
     <Content Include="uc\ucFileUpload.ascx" />
     <Content Include="uc\ucHandleSong.ascx" />
     <Content Include="uc\ucViewContestRound.ascx" />
+    <Content Include="uc\ucViewContests_public.ascx" />
     <Content Include="uc\ucViewEndGameSeries.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -141,6 +145,13 @@
     <Compile Include="Account\EMailPassword.aspx.designer.cs">
       <DependentUpon>EMailPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Info.aspx.cs">
+      <DependentUpon>Info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Info.aspx.designer.cs">
+      <DependentUpon>Info.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -154,6 +165,9 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckAuth.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ImageHandler.ashx.cs">
       <DependentUpon>ImageHandler.ashx</DependentUpon>
@@ -225,12 +239,12 @@
       <DependentUpon>pgEditContest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportHandler.cs" />
     <Compile Include="Site.Master.cs">
@@ -312,6 +326,13 @@
     </Compile>
     <Compile Include="uc\ucViewContestRound.ascx.designer.cs">
       <DependentUpon>ucViewContestRound.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="uc\ucViewContests_public.ascx.cs">
+      <DependentUpon>ucViewContests_public.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="uc\ucViewContests_public.ascx.designer.cs">
+      <DependentUpon>ucViewContests_public.ascx</DependentUpon>
     </Compile>
     <Compile Include="uc\ucViewEndGameSeries.ascx.cs">
       <DependentUpon>ucViewEndGameSeries.ascx</DependentUpon>

@@ -36,20 +36,27 @@ namespace TableHockey
                     m_nContestId = Convert.ToInt32(Request.QueryString["ContestId"]);
 
                     MembershipUser user = Membership.GetUser(m_sUser.Trim());
-                    if (user != null)
+
+                    //Check if caller requests the page in anonymous mode.
+
+                    bool m_bAnonymousMode = false;
+                    if (!String.IsNullOrEmpty(Request.QueryString["AnonymousMode"]))
+                        m_bAnonymousMode = true;
+
+                    if ((user != null) || (m_bAnonymousMode))
                     {
                         using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                         {
                             try
                             {
                                 var querySingleContest = (from c in context.TableHockeyContest
-                                                          where c.OwnerUserId == (Guid)user.ProviderUserKey &&
-                                                                c.ContestId == m_nContestId
+                                                          where c.ContestId == m_nContestId                                                    
                                                           select c).FirstOrDefault();
-                                var queryEndGameContest = (from c in context.TableHockeyContest
-                                                           where c.OwnerUserId == (Guid)user.ProviderUserKey &&
-                                                           c.EndGameForContestId == m_nContestId
+                                 //c.OwnerUserId == (Guid)user.ProviderUserKey &&
+                                var queryEndGameContest = (from c in context.TableHockeyContest                                                       
+                                                           where c.EndGameForContestId == m_nContestId
                                                            select c).FirstOrDefault();
+                                // where c.OwnerUserId == (Guid)user.ProviderUserKey &&
  
                                 if (querySingleContest != null)
                                 {

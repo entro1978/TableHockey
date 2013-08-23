@@ -16,8 +16,8 @@
         <div class="loginDisplay">
             <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                 <AnonymousTemplate>
-                    [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a>
-                    ]
+                    [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a>]
+                    [ <a href="~/Account/Info.aspx" id="A6" runat="server">About this site</a>]
                 </AnonymousTemplate>
                 <LoggedInTemplate>
                     Welcome <span class="bold">
@@ -41,10 +41,10 @@
         <div id="right">
             <asp:ContentPlaceHolder ID="sideContent" runat="server" />
         </div>
-        <div id="footer">
-            <asp:Literal ID="Footer" runat="server" Text="(c) 2013 Umeå Bordshockeysällskap" />
-        </div>
     </div>
+         <div class="line" id="footer">
+            <asp:Literal ID="Literal1" runat="server" Text="(c) 2013 Umeå Bordshockeysällskap" />
+        </div>
     </form>
 </body>
 </html>

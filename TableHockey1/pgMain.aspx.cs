@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace TableHockey
 {
-    public partial class pgMain : PageUtility
+    public partial class pgMain : CheckAuth
     {
         protected void Page_Load(object sender, EventArgs e)
         {                     

@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace TableHockey
 {
-    public partial class pgEditClub : PageUtility
+    public partial class pgEditClub : CheckAuth
     {
         static pgEditClub()
         {

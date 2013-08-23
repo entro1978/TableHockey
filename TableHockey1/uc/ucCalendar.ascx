@@ -3,10 +3,10 @@
     OnClick="ImageButton1_Click" />
 <asp:PlaceHolder ID="plCalendar" Visible="false" runat="server">
     <asp:Calendar ID="Calendar1" runat="server" FirstDayOfWeek="Monday"
-        OnDayRender="Calendar1_DayRender" OnSelectionChanged="Calendar1_SelectionChanged"
-        CssClass="calendarcontrol">
+        OnDayRender="Calendar1_DayRender" OnSelectionChanged="Calendar1_SelectionChanged">
         <TitleStyle CssClass="calendartitle" BackColor="#ffffff" />
-        <TodayDayStyle CssClass="calendar_today" />
+        <TodayDayStyle CssClass="calendar_today" BackColor="#ffffff"/>
+        <DayStyle BackColor="#ffffff" />
         <SelectedDayStyle CssClass="calendar_selected" />
         <WeekendDayStyle CssClass="calendar_weekend" />
     </asp:Calendar>

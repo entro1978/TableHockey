@@ -11,7 +11,7 @@ using AutoMapper;
 
 namespace TableHockey
 {
-    public partial class pgEditContestTableEndGame : PageUtility
+    public partial class pgEditContestTableEndGame : CheckAuth
     {
         protected int m_nContestId;
         protected int m_nNumberOfPlayersLowerRotationLimit;
