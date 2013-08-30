@@ -1,14 +1,14 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" Title="Content Page" CodeBehind="~/pgMain.aspx.cs" Inherits="TableHockey.pgMain" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="mainContent" runat="Server">
-    <div class="line">
+    <div class="line" id="divContestsHeader" runat="server">
         <div class="labelheader">
             <asp:Label ID="LabelContestHeader" runat="server">My contests</asp:Label>
         </div>
     </div>
     <div class="line">
     </div>
-    <div class="player-table">
+    <div class="player-table" id="divContests" runat="server">
         <asp:GridView ID="GridViewContests" runat="server" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField DataField="ContestId" HeaderText="ContestId" />

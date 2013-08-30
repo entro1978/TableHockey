@@ -27,7 +27,8 @@ namespace TableHockey
                             select new { c.ContestId, c.ContestName, c.ContestDescription, c.ContestLocation, c.ContestDateOpened, c.ContestDateClosed };
                 this.GridViewContests.DataSource = query.ToList();
                 this.GridViewContests.DataBind();
-
+                divContests.Visible = (query.Count() > 0);
+                divContestsHeader.Visible = (query.Count() > 0);
                 var playerQuery = from p in context.TableHockeyPlayer
                                   join c in context.TableHockeyClub on p.ClubId equals c.ClubId
                                   select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary, p.RegisteredByUserId, c.ClubId, p.isHistoric };

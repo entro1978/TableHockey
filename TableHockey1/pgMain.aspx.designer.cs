@@ -13,6 +13,15 @@ namespace TableHockey {
     public partial class pgMain {
         
         /// <summary>
+        /// divContestsHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divContestsHeader;
+        
+        /// <summary>
         /// LabelContestHeader control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace TableHockey {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelContestHeader;
+        
+        /// <summary>
+        /// divContests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divContests;
         
         /// <summary>
         /// GridViewContests control.
