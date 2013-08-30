@@ -25,16 +25,20 @@ namespace TableHockey
                     byte[] m_picture = (byte[])querySinglePlayer.PlayerBinary;
                     if ((m_picture != null) && (m_picture.Length > 0))
                     {
-                        ctx.Response.ContentType = "image/bmp";
-                        ctx.Response.OutputStream.Write(m_picture, 0, m_picture.Length - 1);
+                        ctx.Response.Clear();
+                        ctx.Response.ContentType = "image/pjpeg";
+                        ctx.Response.BinaryWrite(m_picture);
+                        ctx.Response.End();
                     }
                     else
                     { 
                         //Make sure dummy picture is displayed instead.
                         var querySetting = context.Settings.First(s => s.SettingDescription == "BINARY_DUMMY_PLAYER_IMAGE");
                         m_picture = (byte[])querySetting.ValueBinary;
-                        ctx.Response.ContentType = "image/bmp";
-                        ctx.Response.OutputStream.Write(m_picture, 0, m_picture.Length - 1);
+                        ctx.Response.Clear();
+                        ctx.Response.ContentType = "image/pjpeg";
+                        ctx.Response.BinaryWrite(m_picture);
+                        ctx.Response.End();
                     }
                 }
             }
@@ -52,8 +56,10 @@ namespace TableHockey
                     m_picture = (byte[])querySetting.ValueBinary;
                     if (m_picture != null)
                     {
-                        ctx.Response.ContentType = "image/bmp";
-                        ctx.Response.OutputStream.Write(m_picture, 0, m_picture.Length - 1);
+                        ctx.Response.Clear();
+                        ctx.Response.ContentType = "image/pjpeg";
+                        ctx.Response.BinaryWrite(m_picture);
+                        ctx.Response.End();
                     }
                 }
             }
