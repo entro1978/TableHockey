@@ -94,7 +94,11 @@
     <Content Include="Account\Info.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="images\BackgroundTest.png" />
+    <Content Include="images\BackgroundTest2.png" />
+    <Content Include="images\BackgroundTest3.png" />
     <Content Include="images\Calendar.png" />
+    <Content Include="images\fjlinder55.jpg" />
     <Content Include="images\share.jpg" />
     <Content Include="images\TableHockey2.jpg" />
     <Content Include="images\TableHockey3.jpg" />
