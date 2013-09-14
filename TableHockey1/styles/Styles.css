@@ -1,8 +1,9 @@
-body {margin: 0;padding: 0;background: #000000;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #DEDDDA;}
+body {margin: 0;padding: 0;background: #000000;font-family: Arial, Helvetica, sans-serif;font-size: 12px;color: #DEDDDA;background-image: url('../images/fjlinder55.png');}
 h1, h2, h3 {margin: 0;padding: 0;font-weight: normal;color: #555555;}
 h1 {font-size: 2em;}
 h2 {font-size: 2.4em;}
 h3 {font-size: 1.6em;}
+
 
 p, ul, ol {margin-top: 0;line-height: 180%;}
 
