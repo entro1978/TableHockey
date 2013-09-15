@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="mainContent" runat="server">
     
         <div>
-            <div style="float: left; margin-right: 10px;" id="divExportTable" runat="server">
+            <div style="float: left; margin-right: 10px;margin-bottom:10px;" id="divExportTable" runat="server">
                 <uc1:ucContestTable ID="ucContestTable1" runat="server" />
             </div>
             <div id="divUcContestRoundPlaceHolder" runat="server" style="margin-left: 75px; float: left; overflow-y: scroll; width: 320px; height: 300px;">
