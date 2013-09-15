@@ -20,6 +20,8 @@
                 </asp:Repeater>
             </div>
         </div>
+    <div class="line">
+    </div>
         <div id="divUcEndGamePlaceHolder" runat="server">
             <div style="float: left;">
                 <asp:Repeater ID="ResultsRepeater" OnItemDataBound="ResultsRepeater_ItemDataBound"
@@ -36,6 +38,7 @@
         </div>
     <div class="line">
     </div>
+    <br />
     <div class="line">
         <div style="float:left;margin-right:30px;">
               <asp:Button ID="ButtonExportToPdf" runat="server" Text="Export to PDF" OnClick="ButtonExportToPdf_Click" />
