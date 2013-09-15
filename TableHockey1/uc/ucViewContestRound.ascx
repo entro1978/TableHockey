@@ -11,9 +11,9 @@
                 <asp:BoundField DataField="HomePlayerDescription" HeaderText="Home player" />              
                 <asp:BoundField DataField="PlayerDivider" HeaderText="" />
                 <asp:BoundField DataField="AwayPlayerDescription" HeaderText="Away player" />
-                <asp:BoundField DataField="HomePlayerScore" HeaderText="" />
+                <asp:BoundField DataField="HomePlayerScoreDescription" HeaderText="" />
                 <asp:BoundField DataField="ScoreDivider" HeaderText="" />
-                <asp:BoundField DataField="AwayPlayerScore" HeaderText="" />
+                <asp:BoundField DataField="AwayPlayerScoreDescription" HeaderText="" />
             </Columns>
         </asp:GridView>
     </div>
