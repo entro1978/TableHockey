@@ -6,7 +6,15 @@
         <div>
             <div style="float: left; margin-right: 10px;margin-bottom:10px;" id="divExportTable" runat="server">
                 <uc1:ucContestTable ID="ucContestTable1" runat="server" />
-                <div class="line"></div>
+                <div class="line">
+                    &nbsp;
+                </div>
+                <div class="line">
+                    &nbsp;
+                </div>
+                <div class="line">
+                    &nbsp;
+                </div>
             </div>
             <div id="divUcContestRoundPlaceHolder" runat="server" style="margin-left: 75px; float: left; overflow-y: scroll; width: 320px; height: 300px;">
                 <asp:Repeater ID="RoundRepeater" OnItemDataBound="RoundRepeater_ItemDataBound"
