@@ -50,14 +50,14 @@ namespace TableHockey
                             try
                             {
                                 var querySingleContest = (from c in context.TableHockeyContest
-                                                          where c.ContestId == m_nContestId                                                    
+                                                          where c.ContestId == m_nContestId
                                                           select c).FirstOrDefault();
-                                 //c.OwnerUserId == (Guid)user.ProviderUserKey &&
-                                var queryEndGameContest = (from c in context.TableHockeyContest                                                       
+                                //c.OwnerUserId == (Guid)user.ProviderUserKey &&
+                                var queryEndGameContest = (from c in context.TableHockeyContest
                                                            where c.EndGameForContestId == m_nContestId
                                                            select c).FirstOrDefault();
                                 // where c.OwnerUserId == (Guid)user.ProviderUserKey &&
- 
+
                                 if (querySingleContest != null)
                                 {
                                     if (querySingleContest.EndGameForContestId == null)
@@ -110,9 +110,9 @@ namespace TableHockey
                 m_rounds = (from r in context.TableHockeyContestRounds
                             where ((r.ContestId == i_nContestId))
                             select r).OrderBy(p => p.RoundNumber).ToList();
-         
+
                 //Get entered results from uc and update games for table number.
-                Session["pgContestSummary.ucRoundList"] = null;        
+                Session["pgContestSummary.ucRoundList"] = null;
                 this.RoundRepeater.DataSource = m_rounds;
                 this.RoundRepeater.DataBind();
             }
@@ -174,8 +174,8 @@ namespace TableHockey
                 Session["pgContestSummary.ucRoundList"] = m_ucRoundList;
                 if (m_round.isFinalRound)
                 {
-                    foreach(uc.ucViewContestRound m_uc in m_ucRoundList)
-                       PlaceHolder2.Controls.Add(m_uc);
+                    foreach (uc.ucViewContestRound m_uc in m_ucRoundList)
+                        PlaceHolder2.Controls.Add(m_uc);
                     string m_sRoundHtml = GetSummary(divUcContestRoundPlaceHolder);
                     Session["pgContestSummary.roundHTML"] = m_sRoundHtml;
                 }
@@ -193,10 +193,10 @@ namespace TableHockey
                 TableHockeyContestRound m_round = (TableHockeyContestRound)e.Item.DataItem;
                 Dictionary<int, uc.ucViewEndGameSeries> m_ucList;
                 if (Session["pgContestSummary.ucList"] != null)
-                    m_ucList = (Dictionary<int,uc.ucViewEndGameSeries>)Session["pgContestSummary.ucList"];
+                    m_ucList = (Dictionary<int, uc.ucViewEndGameSeries>)Session["pgContestSummary.ucList"];
                 else
-                    m_ucList = new Dictionary<int,uc.ucViewEndGameSeries>();
-                
+                    m_ucList = new Dictionary<int, uc.ucViewEndGameSeries>();
+
                 for (int m_nCurrentTableNumber = 1; m_nCurrentTableNumber <= m_nMaxNumberOfConcurrentGames; m_nCurrentTableNumber++)
                 {
                     List<TableHockeyGame> m_gamesOnCurrentTable = m_round.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
@@ -211,76 +211,77 @@ namespace TableHockey
                         int m_nNumberOfRounds = Convert.ToInt32(Session["pgContestSummary.m_nNumberOfRounds"]);
                         //Get qualifying players from current round.
                         Dictionary<int, int> m_playersToNextRound = TableHockeyContestHandler.getPlayersToNextRound(m_round, m_gamesOnCurrentTable.Count);
-                        //Get qualifying player for current table number.
-                        int m_nQualifyingPlayerForCurrentTableNumber = m_playersToNextRound[m_nCurrentTableNumber];
-                        if (m_round.isFinalRound)
-                        {                       
-                            m_ucList.Add(8, uc);
-                            Session["pgContestSummary.ucList"] = m_ucList;
-                        }
-                        if (m_round.RoundNumber == (m_nNumberOfRounds - 1))
+                        if (m_playersToNextRound.Count > 0)
                         {
-                            //Get previous round.
-                            TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
-                            //Match qualifying player id with either home or away player.
-                            if ((m_nCurrentTableNumber == 1) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(4, uc);
-                            if ((m_nCurrentTableNumber == 2) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(12, uc);
-                            //TODO: Analogt för följande omgångar. Traversera över m_playersToNextRound
-                            Session["pgContestSummary.ucList"] = m_ucList;                        
+                            //Get qualifying player for current table number.
+                            int m_nQualifyingPlayerForCurrentTableNumber = m_playersToNextRound[m_nCurrentTableNumber];
+                            if (m_round.isFinalRound)
+                            {
+                                m_ucList.Add(8, uc);
+                                Session["pgContestSummary.ucList"] = m_ucList;
+                            }
+                            if (m_round.RoundNumber == (m_nNumberOfRounds - 1))
+                            {
+                                //Get previous round.
+                                TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
+                                //Match qualifying player id with either home or away player.
+                                if ((m_nCurrentTableNumber == 1) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(4, uc);
+                                if ((m_nCurrentTableNumber == 2) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(12, uc);
+                                //TODO: Analogt för följande omgångar. Traversera över m_playersToNextRound
+                                Session["pgContestSummary.ucList"] = m_ucList;
+                            }
+                            if (m_round.RoundNumber == (m_nNumberOfRounds - 2))
+                            {
+                                //Get previous round.
+                                TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
+                                List<TableHockeyGame> m_prevGamesOnCurrentTable = m_prevRound.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
+                                if ((m_nCurrentTableNumber == 1) &&
+                                    ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
+                                    m_ucList.Add(2, uc);
+                                if ((m_nCurrentTableNumber == 2) &&
+                                    ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
+                                    m_ucList.Add(6, uc);
+                                if ((m_nCurrentTableNumber == 3) &&
+                                    ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
+                                    m_ucList.Add(10, uc);
+                                if ((m_nCurrentTableNumber == 4) &&
+                                    ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
+                                    m_ucList.Add(14, uc);
+                                Session["pgContestSummary.ucList"] = m_ucList;
+                            }
+                            if (m_round.RoundNumber == (m_nNumberOfRounds - 3))
+                            {
+                                //Get previous round.
+                                //TODO:  Fixa för åttondel analogt med kvartsfinal ovan! Gnetigt men det går! 2013-07-23.
+                                TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
+                                List<TableHockeyGame> m_prevGamesOnCurrentTable = m_prevRound.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
+                                if ((m_nCurrentTableNumber == 1) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(1, uc);
+                                if ((m_nCurrentTableNumber == 2) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(3, uc);
+                                if ((m_nCurrentTableNumber == 3) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(5, uc);
+                                if ((m_nCurrentTableNumber == 4) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(7, uc);
+                                if ((m_nCurrentTableNumber == 5) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(9, uc);
+                                if ((m_nCurrentTableNumber == 6) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(11, uc);
+                                if ((m_nCurrentTableNumber == 7) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(13, uc);
+                                if ((m_nCurrentTableNumber == 8) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
+                                    m_ucList.Add(15, uc);
+                                Session["pgContestSummary.ucList"] = m_ucList;
+                            }
                         }
-                        if (m_round.RoundNumber == (m_nNumberOfRounds - 2))
-                        {
-                            //Get previous round.
-                            TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
-                            List<TableHockeyGame> m_prevGamesOnCurrentTable = m_prevRound.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
-                            if ((m_nCurrentTableNumber == 1) &&
-                                ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
-                                m_ucList.Add(2, uc);
-                            if ((m_nCurrentTableNumber == 2) &&
-                                ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
-                                m_ucList.Add(6, uc); 
-                            if ((m_nCurrentTableNumber == 3) &&
-                                ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
-                                m_ucList.Add(10, uc);
-                            if ((m_nCurrentTableNumber == 4) &&
-                                ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(m_gamesOnCurrentTable.Count).AwayPlayerId)))
-                                m_ucList.Add(14, uc);
-                            Session["pgContestSummary.ucList"] = m_ucList;
-                        }
-                        if (m_round.RoundNumber == (m_nNumberOfRounds - 3))
-                        {
-                            //Get previous round.
-                            //TODO:  Fixa för åttondel analogt med kvartsfinal ovan! Gnetigt men det går! 2013-07-23.
-                            TableHockeyContestRound m_prevRound = (TableHockeyContestRound)Session["pgContestSummary.previousRound"];
-                            List<TableHockeyGame> m_prevGamesOnCurrentTable = m_prevRound.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
-                            if ((m_nCurrentTableNumber == 1) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(1, uc);
-                            if ((m_nCurrentTableNumber == 2) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(3, uc);
-                            if ((m_nCurrentTableNumber == 3) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(5, uc);
-                            if ((m_nCurrentTableNumber == 4) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(7, uc);
-                            if ((m_nCurrentTableNumber == 5) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(9, uc);
-                            if ((m_nCurrentTableNumber == 6) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(11, uc);
-                            if ((m_nCurrentTableNumber == 7) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(13, uc);
-                            if ((m_nCurrentTableNumber == 8) && ((m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).HomePlayerId) || (m_nQualifyingPlayerForCurrentTableNumber == m_prevRound.TableHockeyGames.ElementAt(0).AwayPlayerId)))
-                                m_ucList.Add(15, uc);
-                            Session["pgContestSummary.ucList"] = m_ucList;
-                        }
-
-                       
                     }
                 }
                 Session["pgContestSummary.previousRound"] = m_round;
                 if (m_round.isFirstRound)
                 {
-                    for(int iCount = 1; iCount < 15; iCount++)
+                    for (int iCount = 1; iCount < 15; iCount++)
                     {
                         uc.ucViewEndGameSeries m_uc;
                         if (m_ucList.ContainsKey(iCount))
