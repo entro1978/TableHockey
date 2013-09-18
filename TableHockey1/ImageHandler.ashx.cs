@@ -63,6 +63,32 @@ namespace TableHockey
                     }
                 }
             }
+            if ((m_sImageType != null) && (m_sImageType.ToLower().Trim().Equals("club")))
+            {
+                using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
+                {
+                    var querySingleClub = context.TableHockeyClub.First(c => c.ClubId == id);
+
+                    byte[] m_picture = (byte[])querySingleClub.ClubBinary;
+                    if ((m_picture != null) && (m_picture.Length > 0))
+                    {
+                        ctx.Response.Clear();
+                        ctx.Response.ContentType = "image/pjpeg";
+                        ctx.Response.BinaryWrite(m_picture);
+                        ctx.Response.End();
+                    }
+                    else
+                    {
+                        //Make sure dummy picture is displayed instead. TODO: Replace with dummy club image!
+                        var querySetting = context.Settings.First(s => s.SettingDescription == "BINARY_DUMMY_PLAYER_IMAGE");
+                        m_picture = (byte[])querySetting.ValueBinary;
+                        ctx.Response.Clear();
+                        ctx.Response.ContentType = "image/pjpeg";
+                        ctx.Response.BinaryWrite(m_picture);
+                        ctx.Response.End();
+                    }
+                }
+            }
         }
     }
 }

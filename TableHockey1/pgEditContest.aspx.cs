@@ -16,7 +16,7 @@ namespace TableHockey
     {
         static pgEditContest()
         {
-            Mapper.CreateMap<TableHockeyContest, TableHockeyContest>();
+            Mapper.CreateMap<TableHockeyContest, TableHockeyContest>().ForMember("ContestId", r => r.Ignore());
         }
 
         protected TableHockeyData.TableHockeyContest m_ContestContext;
@@ -90,7 +90,27 @@ namespace TableHockey
                 {
                     //Edit existing contest
                     TableHockeyContest m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
-                    Mapper.Map(this.ucEditTableHockeyContest1.m_currentContest, m_currentContest);  
+                    //Mapper.Map(this.ucEditTableHockeyContest1.m_currentContest, m_currentContest);  
+                    m_currentContest.ContestBinary = this.ucEditTableHockeyContest1.m_currentContest.ContestBinary;
+                    m_currentContest.ContestDateClosed = this.ucEditTableHockeyContest1.m_currentContest.ContestDateClosed;
+                    m_currentContest.ContestDateOpened = this.ucEditTableHockeyContest1.m_currentContest.ContestDateOpened;
+                    m_currentContest.ContestDescription = this.ucEditTableHockeyContest1.m_currentContest.ContestDescription;
+                    m_currentContest.ContestLocation = this.ucEditTableHockeyContest1.m_currentContest.ContestLocation;
+                    m_currentContest.ContestName = this.ucEditTableHockeyContest1.m_currentContest.ContestName;
+                    m_currentContest.GameLengthMinutes = this.ucEditTableHockeyContest1.m_currentContest.GameLengthMinutes;
+                    m_currentContest.isFinalGameContest = this.ucEditTableHockeyContest1.m_currentContest.isFinalGameContest;
+                    m_currentContest.isGoalDifferenceRanked = this.ucEditTableHockeyContest1.m_currentContest.isGoalDifferenceRanked;
+                    m_currentContest.NumberOfPlayersToNextRound = this.ucEditTableHockeyContest1.m_currentContest.NumberOfPlayersToNextRound;
+                    m_currentContest.numberOfRounds = this.ucEditTableHockeyContest1.m_currentContest.numberOfRounds;
+                    m_currentContest.PointsLostGame = this.ucEditTableHockeyContest1.m_currentContest.PointsLostGame;
+                    m_currentContest.PointsTiedGame = this.ucEditTableHockeyContest1.m_currentContest.PointsTiedGame;
+                    m_currentContest.PointsWinningGame = this.ucEditTableHockeyContest1.m_currentContest.PointsWinningGame;
+                    //Also update closing date for any linked end game contest!
+                    TableHockeyContest m_currentEndGameContest = context.TableHockeyContest.FirstOrDefault(i => i.EndGameForContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
+                    if (m_currentEndGameContest != null)
+                    {
+                        m_currentEndGameContest.ContestDateClosed = this.ucEditTableHockeyContest1.m_currentContest.ContestDateClosed;
+                    }
                 }
                 context.SaveChanges();
                 Response.Redirect("~/pgMain.aspx");

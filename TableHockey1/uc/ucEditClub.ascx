@@ -30,7 +30,7 @@
             <asp:Label ID="LabelClubFoundedDate" runat="server" Text="Club founded on"></asp:Label>
         </div>
         <div style="float: left; margin-top: 5px;">
-            <asp:TextBox ID="TextBoxClubFoundedDate" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="TextBoxClubFoundedDate" runat="server"></asp:TextBox>
             <uc1:ucCalendar ID="ucCalendarStarted" runat="server"></uc1:ucCalendar>
         </div>
         <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="TextBoxClubFoundedDate"
@@ -41,7 +41,7 @@
             <asp:Label ID="LabelClubDefunctDate" runat="server" Text="Club defunct on"></asp:Label>
         </div>
         <div style="float: left; margin-top: 5px;">
-            <asp:TextBox ID="TextBoxClubDefunctDate" runat="server" ReadOnly="true"></asp:TextBox>
+            <asp:TextBox ID="TextBoxClubDefunctDate" runat="server"></asp:TextBox>
             <uc1:ucCalendar ID="ucCalendarClosed" runat="server"></uc1:ucCalendar>
         </div>
         <asp:CustomValidator ID="cvClosedDate" runat="server" ControlToValidate="TextBoxClubDefunctDate"
@@ -65,7 +65,7 @@
     </div>
     <div class="line">
         <div class="labelbold">
-            <asp:Label ID="LabelGoalDifference" runat="server" Text="Club location (country)"></asp:Label>
+            <asp:Label ID="LabelClubCountry" runat="server" Text="Club location (country)"></asp:Label>
         </div>
         <div style="float: left; margin-top: 5px;">
             <asp:DropDownList ID="ddlClubCountry" runat="server">

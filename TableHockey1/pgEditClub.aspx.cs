@@ -49,7 +49,7 @@ namespace TableHockey
                                 }
                                 catch (Exception ex)
                                 {
-                                    Response.Redirect("~/pgEditClub.aspx");
+                                    Response.Redirect("~/pgMain.aspx");
                                 }
                             }
                         }
