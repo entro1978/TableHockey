@@ -25,7 +25,7 @@ namespace TableHockeyData
         public int PlayerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<int> ClubId { get; set; }
+        public int ClubId { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public byte[] PlayerBinary { get; set; }
         public Nullable<System.Guid> RegisteredByUserId { get; set; }

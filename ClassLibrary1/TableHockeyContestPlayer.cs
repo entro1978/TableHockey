@@ -20,7 +20,7 @@ namespace TableHockeyData
         public bool isDummyContestPlayer { get; set; }
         public Nullable<int> FinalPreviousStanding { get; set; }
     
-        public virtual TableHockeyContest TableHockeyContest { get; set; }
         public virtual TableHockeyPlayer TableHockeyPlayer { get; set; }
+        public virtual TableHockeyContest TableHockeyContest { get; set; }
     }
 }

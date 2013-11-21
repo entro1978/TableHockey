@@ -28,10 +28,10 @@ namespace TableHockeyData
         public int TableNumber { get; set; }
         public int IdlePlayerId { get; set; }
     
-        public virtual TableHockeyContest TableHockeyContest { get; set; }
         public virtual TableHockeyPlayer TableHockeyPlayer { get; set; }
         public virtual TableHockeyPlayer TableHockeyPlayer1 { get; set; }
         public virtual TableHockeyContestRound TableHockeyContestRound { get; set; }
         public virtual TableHockeyPlayer TableHockeyPlayer2 { get; set; }
+        public virtual TableHockeyContest TableHockeyContest { get; set; }
     }
 }

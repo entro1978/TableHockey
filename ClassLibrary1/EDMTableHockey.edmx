@@ -17,10 +17,6 @@
             <End Role="TableHockeyContest" EntitySet="TableHockeyContest" />
             <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayer" />
           </AssociationSet>
-          <AssociationSet Name="FK_TableHockeyContestPlayer_TableHockeyContestPlayer" Association="UHSSWEB_DEVModel.Store.FK_TableHockeyContestPlayer_TableHockeyContestPlayer">
-            <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayer" />
-            <End Role="TableHockeyContestPlayer1" EntitySet="TableHockeyContestPlayer" />
-          </AssociationSet>
           <AssociationSet Name="FK_TableHockeyContestPlayer_TableHockeyPlayer" Association="UHSSWEB_DEVModel.Store.FK_TableHockeyContestPlayer_TableHockeyPlayer">
             <End Role="TableHockeyPlayer" EntitySet="TableHockeyPlayer" />
             <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayer" />
@@ -98,6 +94,7 @@
           <Property Name="NumberOfPlayersToNextRound" Type="int" />
           <Property Name="OwnerUserId" Type="uniqueidentifier" />
           <Property Name="EndGameForContestId" Type="int" />
+          <Property Name="isPubliclyVisible" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TableHockeyContestPlayer">
           <Key>
@@ -145,7 +142,7 @@
           <Property Name="PlayerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="ClubId" Type="int" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
           <Property Name="BirthDate" Type="smalldatetime" />
           <Property Name="PlayerBinary" Type="varbinary(max)" />
           <Property Name="RegisteredByUserId" Type="uniqueidentifier" />
@@ -160,18 +157,6 @@
             </Principal>
             <Dependent Role="TableHockeyContestPlayer">
               <PropertyRef Name="ContestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TableHockeyContestPlayer_TableHockeyContestPlayer">
-          <End Role="TableHockeyContestPlayer" Type="UHSSWEB_DEVModel.Store.TableHockeyContestPlayer" Multiplicity="1" />
-          <End Role="TableHockeyContestPlayer1" Type="UHSSWEB_DEVModel.Store.TableHockeyContestPlayer" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TableHockeyContestPlayer">
-              <PropertyRef Name="TableHockeyContestPlayerId" />
-            </Principal>
-            <Dependent Role="TableHockeyContestPlayer1">
-              <PropertyRef Name="TableHockeyContestPlayerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -295,14 +280,8 @@
     <edmx:ConceptualModels>
       <Schema Namespace="UHSSWEB_DEVModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="UHSSWEB_DEVEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TableHockeyClub" EntityType="UHSSWEB_DEVModel.TableHockeyClub" />
-          <EntitySet Name="TableHockeyContest" EntityType="UHSSWEB_DEVModel.TableHockeyContest" />
           <EntitySet Name="TableHockeyGame" EntityType="UHSSWEB_DEVModel.TableHockeyGame" />
           <EntitySet Name="TableHockeyPlayer" EntityType="UHSSWEB_DEVModel.TableHockeyPlayer" />
-          <AssociationSet Name="FK_TableHockeyGame_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest">
-            <End Role="TableHockeyContest" EntitySet="TableHockeyContest" />
-            <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
-          </AssociationSet>
           <AssociationSet Name="FK_TableHockeyGame_TableHockeyPlayer" Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer">
             <End Role="TableHockeyPlayer" EntitySet="TableHockeyPlayer" />
             <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
@@ -313,19 +292,11 @@
           </AssociationSet>
           <EntitySet Name="Settings" EntityType="UHSSWEB_DEVModel.Setting" />
           <EntitySet Name="TableHockeyContestPlayers" EntityType="UHSSWEB_DEVModel.TableHockeyContestPlayer" />
-          <AssociationSet Name="FK_TableHockeyContestPlayer_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest">
-            <End Role="TableHockeyContest" EntitySet="TableHockeyContest" />
-            <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayers" />
-          </AssociationSet>
           <AssociationSet Name="FK_TableHockeyContestPlayer_TableHockeyPlayer" Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyPlayer">
             <End Role="TableHockeyPlayer" EntitySet="TableHockeyPlayer" />
             <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayers" />
           </AssociationSet>
           <EntitySet Name="TableHockeyContestRounds" EntityType="UHSSWEB_DEVModel.TableHockeyContestRound" />
-          <AssociationSet Name="FK_TableHockeyContestRound_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest">
-            <End Role="TableHockeyContest" EntitySet="TableHockeyContest" />
-            <End Role="TableHockeyContestRound" EntitySet="TableHockeyContestRounds" />
-          </AssociationSet>
           <AssociationSet Name="FK_TableHockeyGame_TableHockeyContestRound" Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContestRound">
             <End Role="TableHockeyContestRound" EntitySet="TableHockeyContestRounds" />
             <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
@@ -334,48 +305,21 @@
             <End Role="TableHockeyPlayer" EntitySet="TableHockeyPlayer" />
             <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
           </AssociationSet>
+          <EntitySet Name="TableHockeyClubs" EntityType="UHSSWEB_DEVModel.TableHockeyClub" />
+          <EntitySet Name="TableHockeyContests" EntityType="UHSSWEB_DEVModel.TableHockeyContest" />
+          <AssociationSet Name="FK_TableHockeyContestPlayer_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest">
+            <End Role="TableHockeyContest" EntitySet="TableHockeyContests" />
+            <End Role="TableHockeyContestPlayer" EntitySet="TableHockeyContestPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHockeyContestRound_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest">
+            <End Role="TableHockeyContest" EntitySet="TableHockeyContests" />
+            <End Role="TableHockeyContestRound" EntitySet="TableHockeyContestRounds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHockeyGame_TableHockeyContest" Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest">
+            <End Role="TableHockeyContest" EntitySet="TableHockeyContests" />
+            <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="TableHockeyClub">
-          <Key>
-            <PropertyRef Name="ClubId" />
-          </Key>
-          <Property Name="ClubId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClubName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="ClubPhoneNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="FoundedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DefunctDate" Type="DateTime" Precision="0" />
-          <Property Name="ClubLocation" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
-          <Property Type="Binary" Name="ClubBinary" MaxLength="Max" FixedLength="false" />
-          <Property Type="Guid" Name="RegisteredByUserId" />
-          <Property Type="String" Name="ClubContactEmail" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ClubCountryCode" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ClubContactPerson" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TableHockeyContest">
-          <Key>
-            <PropertyRef Name="ContestId" />
-          </Key>
-          <Property Name="ContestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContestName" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
-          <Property Name="ContestDateOpened" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ContestLocation" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
-          <Property Name="ContestDateClosed" Type="DateTime" Precision="0" />
-          <Property Name="ContestDescription" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
-          <Property Name="ContestBinary" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="isGoalDifferenceRanked" Type="Boolean" Nullable="false" />
-          <Property Name="numberOfRounds" Type="Int32" Nullable="false" />
-          <Property Name="PointsWinningGame" Type="Int32" Nullable="false" />
-          <Property Name="PointsTiedGame" Type="Int32" Nullable="false" />
-          <Property Name="PointsLostGame" Type="Int32" Nullable="false" />
-          <Property Name="GameLengthMinutes" Type="Int32" Nullable="false" />
-          <Property Name="NumberOfPlayersToNextRound" Type="Int32" />
-          <NavigationProperty Name="TableHockeyGame" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyGame" />
-          <Property Type="Boolean" Name="isFinalGameContest" Nullable="false" />
-          <NavigationProperty Name="TableHockeyContestPlayers" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestPlayer" />
-          <NavigationProperty Name="TableHockeyContestRounds" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestRound" />
-          <Property Type="Guid" Name="OwnerUserId" />
-          <Property Type="Int32" Name="EndGameForContestId" />
-        </EntityType>
         <EntityType Name="TableHockeyGame">
           <Key>
             <PropertyRef Name="GameId" />
@@ -390,7 +334,6 @@
           <Property Name="isFinalGame" Type="Boolean" Nullable="false" />
           <Property Name="hasSuddenDeath" Type="Boolean" Nullable="false" />
           <Property Name="ContestId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" FromRole="TableHockeyGame" ToRole="TableHockeyContest" />
           <NavigationProperty Name="TableHockeyPlayer" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer" FromRole="TableHockeyGame" ToRole="TableHockeyPlayer" />
           <NavigationProperty Name="TableHockeyPlayer1" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer1" FromRole="TableHockeyGame" ToRole="TableHockeyPlayer" />
           <Property Type="Int32" Name="TableHockeyContestRoundId" Nullable="false" />
@@ -398,6 +341,7 @@
           <Property Type="Int32" Name="TableNumber" Nullable="false" />
           <Property Type="Int32" Name="IdlePlayerId" Nullable="false" />
           <NavigationProperty Name="TableHockeyPlayer2" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer2" FromRole="TableHockeyGame" ToRole="TableHockeyPlayer" />
+          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" FromRole="TableHockeyGame" ToRole="TableHockeyContest" />
         </EntityType>
         <EntityType Name="TableHockeyPlayer">
           <Key>
@@ -406,7 +350,7 @@
           <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ClubId" Type="Int32" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TableHockeyGame" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer" FromRole="TableHockeyPlayer" ToRole="TableHockeyGame" />
           <NavigationProperty Name="TableHockeyGame1" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer1" FromRole="TableHockeyPlayer" ToRole="TableHockeyGame" />
           <Property Type="DateTime" Name="BirthDate" Precision="0" />
@@ -416,18 +360,6 @@
           <Property Type="Guid" Name="RegisteredByUserId" />
           <Property Type="Int32" Name="isHistoric" Nullable="false" />
         </EntityType>
-        <Association Name="FK_TableHockeyGame_TableHockeyContest">
-          <End Role="TableHockeyContest" Type="UHSSWEB_DEVModel.TableHockeyContest" Multiplicity="1" />
-          <End Role="TableHockeyGame" Type="UHSSWEB_DEVModel.TableHockeyGame" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TableHockeyContest">
-              <PropertyRef Name="ContestId" />
-            </Principal>
-            <Dependent Role="TableHockeyGame">
-              <PropertyRef Name="ContestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TableHockeyGame_TableHockeyPlayer">
           <End Role="TableHockeyPlayer" Type="UHSSWEB_DEVModel.TableHockeyPlayer" Multiplicity="1" />
           <End Role="TableHockeyGame" Type="UHSSWEB_DEVModel.TableHockeyGame" Multiplicity="*" />
@@ -470,23 +402,11 @@
           <Property Type="Int32" Name="TableHockeyContestPlayerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="ContestId" Nullable="false" />
           <Property Type="Int32" Name="PlayerId" Nullable="false" />
-          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" FromRole="TableHockeyContestPlayer" ToRole="TableHockeyContest" />
           <NavigationProperty Name="TableHockeyPlayer" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyPlayer" FromRole="TableHockeyContestPlayer" ToRole="TableHockeyPlayer" />
           <Property Type="Boolean" Name="isDummyContestPlayer" Nullable="false" />
           <Property Type="Int32" Name="FinalPreviousStanding" />
+          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" FromRole="TableHockeyContestPlayer" ToRole="TableHockeyContest" />
           </EntityType>
-        <Association Name="FK_TableHockeyContestPlayer_TableHockeyContest">
-          <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
-          <End Type="UHSSWEB_DEVModel.TableHockeyContestPlayer" Role="TableHockeyContestPlayer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TableHockeyContest">
-              <PropertyRef Name="ContestId" />
-            </Principal>
-            <Dependent Role="TableHockeyContestPlayer">
-              <PropertyRef Name="ContestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TableHockeyContestPlayer_TableHockeyPlayer">
           <End Type="UHSSWEB_DEVModel.TableHockeyPlayer" Role="TableHockeyPlayer" Multiplicity="1" />
           <End Type="UHSSWEB_DEVModel.TableHockeyContestPlayer" Role="TableHockeyContestPlayer" Multiplicity="*" />
@@ -508,22 +428,10 @@
           <Property Type="Int32" Name="RoundNumber" Nullable="false" />
           <Property Type="Boolean" Name="isFirstRound" Nullable="false" />
           <Property Type="Boolean" Name="isFinalRound" Nullable="false" />
-          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" FromRole="TableHockeyContestRound" ToRole="TableHockeyContest" />
           <NavigationProperty Name="TableHockeyGames" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContestRound" FromRole="TableHockeyContestRound" ToRole="TableHockeyGame" />
           <Property Type="Boolean" Name="isEndGameRound" />
+          <NavigationProperty Name="TableHockeyContest" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" FromRole="TableHockeyContestRound" ToRole="TableHockeyContest" />
         </EntityType>
-        <Association Name="FK_TableHockeyContestRound_TableHockeyContest">
-          <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
-          <End Type="UHSSWEB_DEVModel.TableHockeyContestRound" Role="TableHockeyContestRound" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TableHockeyContest">
-              <PropertyRef Name="ContestId" />
-            </Principal>
-            <Dependent Role="TableHockeyContestRound">
-              <PropertyRef Name="ContestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TableHockeyGame_TableHockeyContestRound">
           <End Type="UHSSWEB_DEVModel.TableHockeyContestRound" Role="TableHockeyContestRound" Multiplicity="1" />
           <End Type="UHSSWEB_DEVModel.TableHockeyGame" Role="TableHockeyGame" Multiplicity="*" />
@@ -548,44 +456,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TableHockeyClub">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Type="Int32" Name="ClubId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ClubName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClubPhoneNo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="FoundedDate" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="DefunctDate" Precision="0" />
+          <Property Type="String" Name="ClubLocation" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="ClubBinary" MaxLength="Max" FixedLength="false" />
+          <Property Type="Guid" Name="RegisteredByUserId" />
+          <Property Type="String" Name="ClubContactEmail" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClubCountryCode" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ClubContactPerson" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TableHockeyContest">
+          <Key>
+            <PropertyRef Name="ContestId" />
+          </Key>
+          <Property Type="Int32" Name="ContestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ContestName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ContestDateOpened" Nullable="false" Precision="0" />
+          <Property Type="String" Name="ContestLocation" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ContestDateClosed" Precision="0" />
+          <Property Type="String" Name="ContestDescription" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="ContestBinary" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="isFinalGameContest" Nullable="false" />
+          <Property Type="Boolean" Name="isGoalDifferenceRanked" Nullable="false" />
+          <Property Type="Int32" Name="numberOfRounds" Nullable="false" />
+          <Property Type="Int32" Name="PointsWinningGame" Nullable="false" />
+          <Property Type="Int32" Name="PointsTiedGame" Nullable="false" />
+          <Property Type="Int32" Name="PointsLostGame" Nullable="false" />
+          <Property Type="Int32" Name="GameLengthMinutes" Nullable="false" />
+          <Property Type="Int32" Name="NumberOfPlayersToNextRound" />
+          <Property Type="Guid" Name="OwnerUserId" />
+          <Property Type="Int32" Name="EndGameForContestId" />
+          <Property Type="Boolean" Name="isPubliclyVisible" Nullable="false" />
+          <NavigationProperty Name="TableHockeyContestPlayers" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestPlayer" />
+          <NavigationProperty Name="TableHockeyContestRounds" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestRound" />
+          <NavigationProperty Name="TableHockeyGames" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyGame" />
+        </EntityType>
+        <Association Name="FK_TableHockeyContestPlayer_TableHockeyContest">
+          <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
+          <End Type="UHSSWEB_DEVModel.TableHockeyContestPlayer" Role="TableHockeyContestPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableHockeyContest">
+              <PropertyRef Name="ContestId" />
+            </Principal>
+            <Dependent Role="TableHockeyContestPlayer">
+              <PropertyRef Name="ContestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHockeyContestRound_TableHockeyContest">
+          <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
+          <End Type="UHSSWEB_DEVModel.TableHockeyContestRound" Role="TableHockeyContestRound" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableHockeyContest">
+              <PropertyRef Name="ContestId" />
+            </Principal>
+            <Dependent Role="TableHockeyContestRound">
+              <PropertyRef Name="ContestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHockeyGame_TableHockeyContest">
+          <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
+          <End Type="UHSSWEB_DEVModel.TableHockeyGame" Role="TableHockeyGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableHockeyContest">
+              <PropertyRef Name="ContestId" />
+            </Principal>
+            <Dependent Role="TableHockeyGame">
+              <PropertyRef Name="ContestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UHSSWEB_DEVModelStoreContainer" CdmEntityContainer="UHSSWEB_DEVEntities">
-          <EntitySetMapping Name="TableHockeyClub"><EntityTypeMapping TypeName="UHSSWEB_DEVModel.TableHockeyClub"><MappingFragment StoreEntitySet="TableHockeyClub">
-            <ScalarProperty Name="ClubContactPerson" ColumnName="ClubContactPerson" />
-                <ScalarProperty Name="ClubCountryCode" ColumnName="ClubCountryCode" />
-                <ScalarProperty Name="ClubContactEmail" ColumnName="ClubContactEmail" />
-                <ScalarProperty Name="RegisteredByUserId" ColumnName="RegisteredByUserId" />
-                <ScalarProperty Name="ClubBinary" ColumnName="ClubBinary" />
-                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
-            <ScalarProperty Name="ClubName" ColumnName="ClubName" />
-            <ScalarProperty Name="ClubPhoneNo" ColumnName="ClubPhoneNo" />
-            <ScalarProperty Name="FoundedDate" ColumnName="FoundedDate" />
-            <ScalarProperty Name="DefunctDate" ColumnName="DefunctDate" />
-            <ScalarProperty Name="ClubLocation" ColumnName="ClubLocation" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="TableHockeyContest"><EntityTypeMapping TypeName="UHSSWEB_DEVModel.TableHockeyContest"><MappingFragment StoreEntitySet="TableHockeyContest">
-            <ScalarProperty Name="EndGameForContestId" ColumnName="EndGameForContestId" />
-                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
-                <ScalarProperty Name="isFinalGameContest" ColumnName="isFinalGameContest" />
-                <ScalarProperty Name="ContestId" ColumnName="ContestId" />
-            <ScalarProperty Name="ContestName" ColumnName="ContestName" />
-            <ScalarProperty Name="ContestDateOpened" ColumnName="ContestDateOpened" />
-            <ScalarProperty Name="ContestLocation" ColumnName="ContestLocation" />
-            <ScalarProperty Name="ContestDateClosed" ColumnName="ContestDateClosed" />
-            <ScalarProperty Name="ContestDescription" ColumnName="ContestDescription" />
-            <ScalarProperty Name="ContestBinary" ColumnName="ContestBinary" />
-            <ScalarProperty Name="isGoalDifferenceRanked" ColumnName="isGoalDifferenceRanked" />
-            <ScalarProperty Name="numberOfRounds" ColumnName="numberOfRounds" />
-            <ScalarProperty Name="PointsWinningGame" ColumnName="PointsWinningGame" />
-            <ScalarProperty Name="PointsTiedGame" ColumnName="PointsTiedGame" />
-            <ScalarProperty Name="PointsLostGame" ColumnName="PointsLostGame" />
-            <ScalarProperty Name="GameLengthMinutes" ColumnName="GameLengthMinutes" />
-            <ScalarProperty Name="NumberOfPlayersToNextRound" ColumnName="NumberOfPlayersToNextRound" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="TableHockeyGame"><EntityTypeMapping TypeName="UHSSWEB_DEVModel.TableHockeyGame"><MappingFragment StoreEntitySet="TableHockeyGame">
             <ScalarProperty Name="IdlePlayerId" ColumnName="IdlePlayerId" />
                 <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
@@ -646,6 +600,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TableHockeyClubs">
+            <EntityTypeMapping TypeName="UHSSWEB_DEVModel.TableHockeyClub">
+              <MappingFragment StoreEntitySet="TableHockeyClub">
+                <ScalarProperty Name="ClubContactPerson" ColumnName="ClubContactPerson" />
+                <ScalarProperty Name="ClubCountryCode" ColumnName="ClubCountryCode" />
+                <ScalarProperty Name="ClubContactEmail" ColumnName="ClubContactEmail" />
+                <ScalarProperty Name="RegisteredByUserId" ColumnName="RegisteredByUserId" />
+                <ScalarProperty Name="ClubBinary" ColumnName="ClubBinary" />
+                <ScalarProperty Name="ClubLocation" ColumnName="ClubLocation" />
+                <ScalarProperty Name="DefunctDate" ColumnName="DefunctDate" />
+                <ScalarProperty Name="FoundedDate" ColumnName="FoundedDate" />
+                <ScalarProperty Name="ClubPhoneNo" ColumnName="ClubPhoneNo" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableHockeyContests">
+            <EntityTypeMapping TypeName="UHSSWEB_DEVModel.TableHockeyContest">
+              <MappingFragment StoreEntitySet="TableHockeyContest">
+                <ScalarProperty Name="isPubliclyVisible" ColumnName="isPubliclyVisible" />
+                <ScalarProperty Name="EndGameForContestId" ColumnName="EndGameForContestId" />
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="NumberOfPlayersToNextRound" ColumnName="NumberOfPlayersToNextRound" />
+                <ScalarProperty Name="GameLengthMinutes" ColumnName="GameLengthMinutes" />
+                <ScalarProperty Name="PointsLostGame" ColumnName="PointsLostGame" />
+                <ScalarProperty Name="PointsTiedGame" ColumnName="PointsTiedGame" />
+                <ScalarProperty Name="PointsWinningGame" ColumnName="PointsWinningGame" />
+                <ScalarProperty Name="numberOfRounds" ColumnName="numberOfRounds" />
+                <ScalarProperty Name="isGoalDifferenceRanked" ColumnName="isGoalDifferenceRanked" />
+                <ScalarProperty Name="isFinalGameContest" ColumnName="isFinalGameContest" />
+                <ScalarProperty Name="ContestBinary" ColumnName="ContestBinary" />
+                <ScalarProperty Name="ContestDescription" ColumnName="ContestDescription" />
+                <ScalarProperty Name="ContestDateClosed" ColumnName="ContestDateClosed" />
+                <ScalarProperty Name="ContestLocation" ColumnName="ContestLocation" />
+                <ScalarProperty Name="ContestDateOpened" ColumnName="ContestDateOpened" />
+                <ScalarProperty Name="ContestName" ColumnName="ContestName" />
+                <ScalarProperty Name="ContestId" ColumnName="ContestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -668,14 +663,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="EDMTableHockey" ZoomLevel="100">
-        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyClub" Width="1.5" PointX="0.75" PointY="1.625" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContest" Width="1.5" PointX="5.25" PointY="3.75" Height="4.480205078125" IsExpanded="true" />
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyGame" Width="1.5" PointX="7.25" PointY="1.125" Height="3.9033007812499996" IsExpanded="true" />
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyPlayer" Width="1.5" PointX="3" PointY="1.625" Height="2.3648893229166674" IsExpanded="true" />
-        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="4.6776025390625" />
-          <ConnectorPoint PointX="7.25" PointY="4.6776025390625" />
-        </AssociationConnector>
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="2.2723388671875" />
           <ConnectorPoint PointX="7.25" PointY="2.2723388671875" />
@@ -686,20 +675,11 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.Setting" Width="1.5" PointX="0.875" PointY="5.375" Height="2.1725878906249996" />
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContestPlayer" Width="1.5" PointX="3.125" PointY="5.875" Height="2.1725878906249996" />
-        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" >
-          <ConnectorPoint PointX="5.25" PointY="6.5862939453125" />
-          <ConnectorPoint PointX="4.75" PointY="6.5862939453125" />
-        </AssociationConnector>
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyPlayer" >
           <ConnectorPoint PointX="3.875" PointY="5.1436979166666656" />
           <ConnectorPoint PointX="3.875" PointY="5.5" />
         </AssociationConnector>
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContestRound" Width="1.5" PointX="9.375" PointY="2.5" Height="2.3648893229166656" />
-        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" >
-          <ConnectorPoint PointX="6.75" PointY="6.1776025390625" />
-          <ConnectorPoint PointX="10.125" PointY="6.1776025390625" />
-          <ConnectorPoint PointX="10.125" PointY="4.8648893229166656" />
-        </AssociationConnector>
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContestRound" >
           <ConnectorPoint PointX="9.375" PointY="3.6824446614583328" />
           <ConnectorPoint PointX="8.75" PointY="3.6824446614583328" />
@@ -708,6 +688,11 @@
           <ConnectorPoint PointX="4.5" PointY="1.88616943359375" />
           <ConnectorPoint PointX="7.25" PointY="1.88616943359375" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyClub" Width="1.5" PointX="1.0379374181097081" PointY="11.025239174731652" />
+        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContest" Width="1.5" PointX="11.993981536475001" PointY="13.003245464061967" />
+        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" />
+        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" />
+        <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" />
       </Diagram>
     </Diagrams>
   </Designer>

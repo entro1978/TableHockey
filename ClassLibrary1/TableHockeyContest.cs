@@ -16,9 +16,9 @@ namespace TableHockeyData
     {
         public TableHockeyContest()
         {
-            this.TableHockeyGame = new HashSet<TableHockeyGame>();
             this.TableHockeyContestPlayers = new HashSet<TableHockeyContestPlayer>();
             this.TableHockeyContestRounds = new HashSet<TableHockeyContestRound>();
+            this.TableHockeyGames = new HashSet<TableHockeyGame>();
         }
     
         public int ContestId { get; set; }
@@ -28,6 +28,7 @@ namespace TableHockeyData
         public Nullable<System.DateTime> ContestDateClosed { get; set; }
         public string ContestDescription { get; set; }
         public byte[] ContestBinary { get; set; }
+        public bool isFinalGameContest { get; set; }
         public bool isGoalDifferenceRanked { get; set; }
         public int numberOfRounds { get; set; }
         public int PointsWinningGame { get; set; }
@@ -35,12 +36,12 @@ namespace TableHockeyData
         public int PointsLostGame { get; set; }
         public int GameLengthMinutes { get; set; }
         public Nullable<int> NumberOfPlayersToNextRound { get; set; }
-        public bool isFinalGameContest { get; set; }
         public Nullable<System.Guid> OwnerUserId { get; set; }
         public Nullable<int> EndGameForContestId { get; set; }
+        public bool isPubliclyVisible { get; set; }
     
-        public virtual ICollection<TableHockeyGame> TableHockeyGame { get; set; }
         public virtual ICollection<TableHockeyContestPlayer> TableHockeyContestPlayers { get; set; }
         public virtual ICollection<TableHockeyContestRound> TableHockeyContestRounds { get; set; }
+        public virtual ICollection<TableHockeyGame> TableHockeyGames { get; set; }
     }
 }
