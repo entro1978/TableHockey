@@ -100,7 +100,7 @@ namespace TableHockey.uc
             string[] m_sPointsWTL = {"2", "1", "0"};   //TODO:  Setting?!
             if (!String.IsNullOrEmpty(TextBoxPointsWinTieLoss.Text))
             {
-                m_sPointsWTL= TextBoxPointsWinTieLoss.Text.Split('/');
+                m_sPointsWTL = TextBoxPointsWinTieLoss.Text.Split('/');
                 m_GUIContest.PointsWinningGame = Convert.ToInt32(m_sPointsWTL[0]);
                 m_GUIContest.PointsTiedGame = Convert.ToInt32(m_sPointsWTL[1]);
                 m_GUIContest.PointsLostGame = Convert.ToInt32(m_sPointsWTL[2]);
@@ -109,6 +109,7 @@ namespace TableHockey.uc
             m_GUIContest.isFinalGameContest = (RadioButtonListTypeOfContest.SelectedValue == "1");
             MembershipUser CurrentUser = Membership.GetUser(this.Page.User.Identity.Name);
             m_GUIContest.OwnerUserId = (Guid)CurrentUser.ProviderUserKey;
+            m_GUIContest.isPubliclyVisible = chbPubliclyVisible.Checked;
             Session["ucEditTableHockeyContest.m_contest"] = m_GUIContest;
             return m_GUIContest;
         }

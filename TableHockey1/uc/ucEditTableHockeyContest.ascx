@@ -118,7 +118,14 @@
             </asp:RadioButtonList>
          </div>
       </div>
-
+       <div class="line">
+        <div class="labelbold">
+           <asp:Label ID="LabelPubliclyVisible" runat="server" Text="Visible to the public"></asp:Label>
+        </div>
+        <div style="float: left; margin-top: 5px;">
+           <asp:CheckBox ID="chbPubliclyVisible" runat="server" Checked="true"/>
+        </div>
+      </div>    
       <br /><br /><br />      
 </div>
 

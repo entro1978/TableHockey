@@ -144,7 +144,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join c in context.TableHockeyClub on p.ClubId equals c.ClubId
+                                          join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
                                           join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
                                           where cp.ContestId == i_nContestId
                                           select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary };
@@ -161,7 +161,7 @@ namespace TableHockey
                     m_lstPlayerViewModel.Add(m_model);
                 }
 
-                var querySingleContest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
+                var querySingleContest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
 
                 foreach (PlayerViewModel m_currentPlayer in m_lstPlayerViewModel)
                 {
