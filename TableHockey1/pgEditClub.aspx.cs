@@ -24,7 +24,7 @@ namespace TableHockey
                 //Get Club details
                 using (var clubcontext = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
-                    var queryAllClubs = clubcontext.TableHockeyClub;
+                    var queryAllClubs = clubcontext.TableHockeyClubs;
                     //Get Club details for existing Club or create new.  Init Club uc
                     int m_nClubId = -1;
                     if (!String.IsNullOrEmpty(Request.QueryString["ClubId"]))
@@ -38,7 +38,7 @@ namespace TableHockey
                             {
                                 try
                                 {
-                                    var querySingleClub = (from c in context.TableHockeyClub
+                                    var querySingleClub = (from c in context.TableHockeyClubs
                                                              where c.RegisteredByUserId == (Guid)user.ProviderUserKey &&
                                                                    c.ClubId == m_nClubId
                                                              select c).FirstOrDefault();
@@ -76,12 +76,12 @@ namespace TableHockey
                     //New Club 
                     TableHockeyClub m_newClub = this.ucEditClub1.m_currentClub;
                     m_newClub.RegisteredByUserId = (Guid)Membership.GetUser(m_sUser.Trim()).ProviderUserKey;
-                    context.TableHockeyClub.Add(m_newClub);
+                    context.TableHockeyClubs.Add(m_newClub);
                 }
                 else
                 {
                     //Edit existing Club
-                    TableHockeyClub m_currentClub = context.TableHockeyClub.FirstOrDefault(i => i.ClubId == this.ucEditClub1.m_currentClub.ClubId);
+                    TableHockeyClub m_currentClub = context.TableHockeyClubs.FirstOrDefault(i => i.ClubId == this.ucEditClub1.m_currentClub.ClubId);
                     Mapper.Map(this.ucEditClub1.m_currentClub, m_currentClub);
                 }
                 context.SaveChanges();

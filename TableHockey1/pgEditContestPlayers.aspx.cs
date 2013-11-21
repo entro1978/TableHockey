@@ -19,7 +19,7 @@ namespace TableHockey
             {
 
                 var availablePlayersQuery = from p in context.TableHockeyPlayer
-                                            join c in context.TableHockeyClub on p.ClubId equals c.ClubId
+                                            join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
                                             where !(from cp in context.TableHockeyContestPlayers
                                                     where cp.ContestId == i_nContestId
                                                     select cp.PlayerId).Contains(p.PlayerId)
@@ -35,7 +35,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join c in context.TableHockeyClub on p.ClubId equals c.ClubId
+                                          join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
                                           join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
                                           where (cp.ContestId == i_nContestId)
                                           select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary };
@@ -50,7 +50,7 @@ namespace TableHockey
         {
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                TableHockeyContest m_contest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_contest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
                 ViewModels.ContestViewModel m_contestViewModel = new ViewModels.ContestViewModel(m_contest);
                 LabelContestHeader.Text = m_contestViewModel.ContestHeader;
                 LabelContestDescription.Text = m_contestViewModel.ContestDescription;
@@ -111,7 +111,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 TableHockeyGame m_tableHockeyGame = context.TableHockeyGame.FirstOrDefault(c => ((c.HomePlayerId == i_nPlayerId) || (c.AwayPlayerId == i_nPlayerId)) && (c.ContestId == m_nContestId));
-                TableHockeyContest m_tableHockeyContest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_tableHockeyContest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
                 return ((m_tableHockeyGame == null) && (m_tableHockeyContest.ContestDateClosed.Equals(DateTime.Parse("1900-01-01"))));
             }
         }

@@ -49,11 +49,11 @@ namespace TableHockey
                         {
                             try
                             {
-                                var querySingleContest = (from c in context.TableHockeyContest
+                                var querySingleContest = (from c in context.TableHockeyContests
                                                           where c.ContestId == m_nContestId
                                                           select c).FirstOrDefault();
                                 //c.OwnerUserId == (Guid)user.ProviderUserKey &&
-                                var queryEndGameContest = (from c in context.TableHockeyContest
+                                var queryEndGameContest = (from c in context.TableHockeyContests
                                                            where c.EndGameForContestId == m_nContestId
                                                            select c).FirstOrDefault();
                                 // where c.OwnerUserId == (Guid)user.ProviderUserKey &&

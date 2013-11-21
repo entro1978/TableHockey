@@ -40,7 +40,7 @@ namespace TableHockey
                         {
                             try
                             {
-                                var querySingleContest = (from c in context.TableHockeyContest
+                                var querySingleContest = (from c in context.TableHockeyContests
                                                           where c.OwnerUserId == (Guid)user.ProviderUserKey &&
                                                                 c.ContestId == m_nContestId
                                                           select c).FirstOrDefault();
@@ -84,12 +84,12 @@ namespace TableHockey
                 if (this.ucEditTableHockeyContest1.m_currentContest.ContestId == -1)
                 {
                     //New contest
-                    context.TableHockeyContest.Add(this.ucEditTableHockeyContest1.m_currentContest);
+                    context.TableHockeyContests.Add(this.ucEditTableHockeyContest1.m_currentContest);
                 }
                 else
                 {
                     //Edit existing contest
-                    TableHockeyContest m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
+                    TableHockeyContest m_currentContest = context.TableHockeyContests.FirstOrDefault(i => i.ContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
                     //Mapper.Map(this.ucEditTableHockeyContest1.m_currentContest, m_currentContest);  
                     m_currentContest.ContestBinary = this.ucEditTableHockeyContest1.m_currentContest.ContestBinary;
                     m_currentContest.ContestDateClosed = this.ucEditTableHockeyContest1.m_currentContest.ContestDateClosed;
@@ -106,7 +106,7 @@ namespace TableHockey
                     m_currentContest.PointsTiedGame = this.ucEditTableHockeyContest1.m_currentContest.PointsTiedGame;
                     m_currentContest.PointsWinningGame = this.ucEditTableHockeyContest1.m_currentContest.PointsWinningGame;
                     //Also update closing date for any linked end game contest!
-                    TableHockeyContest m_currentEndGameContest = context.TableHockeyContest.FirstOrDefault(i => i.EndGameForContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
+                    TableHockeyContest m_currentEndGameContest = context.TableHockeyContests.FirstOrDefault(i => i.EndGameForContestId == this.ucEditTableHockeyContest1.m_currentContest.ContestId);
                     if (m_currentEndGameContest != null)
                     {
                         m_currentEndGameContest.ContestDateClosed = this.ucEditTableHockeyContest1.m_currentContest.ContestDateClosed;

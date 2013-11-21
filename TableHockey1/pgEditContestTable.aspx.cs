@@ -37,7 +37,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 //Get contest details.
-                TableHockeyContest m_contest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_contest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
                 int m_nNumberOfRepetitions = m_contest.numberOfRounds;
                 //Get players.
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
@@ -187,7 +187,7 @@ namespace TableHockey
                     //Get current contest
                     using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                     {
-                        m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == m_nContestId);
+                        m_currentContest = context.TableHockeyContests.FirstOrDefault(i => i.ContestId == m_nContestId);
                     }
                     Session["pgEditContestTable.m_currentContest"] = m_currentContest;
                     //Find or regenerate contest rounds.
@@ -365,10 +365,10 @@ namespace TableHockey
                 using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
                     //Create new end game only if no previous exists.
-                    var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                    var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                     if (queryExistingEndGame == null)
                     {
-                        context.TableHockeyContest.Add(m_newEndGameContest);
+                        context.TableHockeyContests.Add(m_newEndGameContest);
                         context.SaveChanges();
                     }          
                 }
@@ -377,7 +377,7 @@ namespace TableHockey
                 {
                     //Add new players to end game if none exist.
 
-                     var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                     var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                      if (queryExistingEndGame != null)
                      {
                          m_nEndGameContestId = queryExistingEndGame.ContestId;
@@ -401,7 +401,7 @@ namespace TableHockey
                 using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
                     //Create new end game only if no previous exists.
-                    var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                    var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                     if (queryExistingEndGame != null)
                     {
                         TableHockeyContest m_endGame = (TableHockeyContest)queryExistingEndGame;

@@ -24,7 +24,7 @@ namespace TableHockey
                 //Get Club details
                 using (var clubcontext = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
-                    var queryAllClubs = clubcontext.TableHockeyClub;
+                    var queryAllClubs = clubcontext.TableHockeyClubs;
                     //Get Player details for existing Player or create new.  Init Player uc
                     int m_nPlayerId = -1;
                     if (!String.IsNullOrEmpty(Request.QueryString["PlayerId"]))

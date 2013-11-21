@@ -42,7 +42,7 @@ namespace TableHockey
                     //Get current contest
                     using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                     {
-                        m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == m_nContestId);
+                        m_currentContest = context.TableHockeyContests.FirstOrDefault(i => i.ContestId == m_nContestId);
                     }
 
                     if (m_currentContest.EndGameForContestId == null)
