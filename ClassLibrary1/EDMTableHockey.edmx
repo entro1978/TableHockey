@@ -319,7 +319,7 @@
             <End Role="TableHockeyContest" EntitySet="TableHockeyContests" />
             <End Role="TableHockeyGame" EntitySet="TableHockeyGame" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="TableHockeyGame">
           <Key>
             <PropertyRef Name="GameId" />
@@ -494,9 +494,6 @@
           <Property Type="Guid" Name="OwnerUserId" />
           <Property Type="Int32" Name="EndGameForContestId" />
           <Property Type="Boolean" Name="isPubliclyVisible" Nullable="false" />
-          <NavigationProperty Name="TableHockeyContestPlayers" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestPlayer" />
-          <NavigationProperty Name="TableHockeyContestRounds" Relationship="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyContestRound" />
-          <NavigationProperty Name="TableHockeyGames" Relationship="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" FromRole="TableHockeyContest" ToRole="TableHockeyGame" />
         </EntityType>
         <Association Name="FK_TableHockeyContestPlayer_TableHockeyContest">
           <End Type="UHSSWEB_DEVModel.TableHockeyContest" Role="TableHockeyContest" Multiplicity="1" />
@@ -534,7 +531,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -664,7 +661,7 @@
     <Diagrams>
       <Diagram Name="EDMTableHockey" ZoomLevel="100">
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyGame" Width="1.5" PointX="7.25" PointY="1.125" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyPlayer" Width="1.5" PointX="3" PointY="1.625" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyPlayer" Width="2.25" PointX="3" PointY="1.625" Height="2.3648893229166674" IsExpanded="true" />
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyPlayer" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="2.2723388671875" />
           <ConnectorPoint PointX="7.25" PointY="2.2723388671875" />
@@ -689,7 +686,7 @@
           <ConnectorPoint PointX="7.25" PointY="1.88616943359375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyClub" Width="1.5" PointX="1.0379374181097081" PointY="11.025239174731652" />
-        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContest" Width="1.5" PointX="11.993981536475001" PointY="13.003245464061967" />
+        <EntityTypeShape EntityType="UHSSWEB_DEVModel.TableHockeyContest" Width="2.25" PointX="6" PointY="9.375" />
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestPlayer_TableHockeyContest" />
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyContestRound_TableHockeyContest" />
         <AssociationConnector Association="UHSSWEB_DEVModel.FK_TableHockeyGame_TableHockeyContest" />
