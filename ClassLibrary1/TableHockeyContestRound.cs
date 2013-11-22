@@ -16,7 +16,7 @@ namespace TableHockeyData
     {
         public TableHockeyContestRound()
         {
-            this.TableHockeyGames = new HashSet<TableHockeyGame>();
+            this.TableHockeyGame = new HashSet<TableHockeyGame>();
         }
     
         public int TableHockeyContestRoundId { get; set; }
@@ -26,7 +26,7 @@ namespace TableHockeyData
         public bool isFinalRound { get; set; }
         public Nullable<bool> isEndGameRound { get; set; }
     
-        public virtual ICollection<TableHockeyGame> TableHockeyGames { get; set; }
         public virtual TableHockeyContest TableHockeyContest { get; set; }
+        public virtual ICollection<TableHockeyGame> TableHockeyGame { get; set; }
     }
 }

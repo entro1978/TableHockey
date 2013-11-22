@@ -51,7 +51,7 @@ namespace TableHockey
         {
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                var roundsQuery = from p in context.TableHockeyContestRounds
+                var roundsQuery = from p in context.TableHockeyContestRound
                                   where p.ContestId == i_nContestId
                                   select p;
 
@@ -64,11 +64,11 @@ namespace TableHockey
                     {
                         foreach (TableHockeyContestRound m_round in (List<TableHockeyContestRound>)roundsQuery.ToList())
                         {
-                            foreach (TableHockeyGame m_game in m_round.TableHockeyGames.ToList())
+                            foreach (TableHockeyGame m_game in m_round.TableHockeyGame.ToList())
                             {
                                 context.TableHockeyGame.Remove(m_game);
                             }
-                            context.TableHockeyContestRounds.Remove(m_round);
+                            context.TableHockeyContestRound.Remove(m_round);
                         }
                         context.SaveChanges();
                     }
@@ -76,7 +76,7 @@ namespace TableHockey
                     List<TableHockeyContestRound> m_lstTableHockeyContestRound = m_contestHandler.getTableHockeyContestRoundList(i_nContestId, i_nNumberOfRounds);
                     foreach (TableHockeyContestRound m_round in m_lstTableHockeyContestRound)
                     {
-                        context.TableHockeyContestRounds.Add(m_round);
+                        context.TableHockeyContestRound.Add(m_round);
                     }
                 }
                 context.SaveChanges();
@@ -112,13 +112,13 @@ namespace TableHockey
             int m_nNumberOfGamesToWinSeries = Convert.ToInt32((1 + i_nGamesPerSeries) / 2.0);
             Dictionary<int, int> m_dictPlayersToNextRound = new Dictionary<int, int>();
 
-            if (i_enteredRound.TableHockeyGames.Count > 0)
+            if (i_enteredRound.TableHockeyGame.Count > 0)
             {
                 for (int m_nTableNumber = 1; m_nTableNumber <= PageUtility.m_nMaxNumberOfConcurrentGames; m_nTableNumber++)
                 {
                     int m_nHomeWon = 0;
                     int m_nAwayWon = 0;
-                    var m_gamesForTable = i_enteredRound.TableHockeyGames.Where(g => g.TableNumber == m_nTableNumber);
+                    var m_gamesForTable = i_enteredRound.TableHockeyGame.Where(g => g.TableNumber == m_nTableNumber);
                     foreach (TableHockeyGame m_game in m_gamesForTable)
                     {
                         if ((m_game.AwayPlayerScore >= 0) && (m_game.HomePlayerScore >= 0))

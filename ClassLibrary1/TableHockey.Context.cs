@@ -25,12 +25,12 @@ namespace TableHockeyData
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Settings> Settings { get; set; }
+        public DbSet<TableHockeyClub> TableHockeyClub { get; set; }
+        public DbSet<TableHockeyContest> TableHockeyContest { get; set; }
+        public DbSet<TableHockeyContestPlayer> TableHockeyContestPlayer { get; set; }
+        public DbSet<TableHockeyContestRound> TableHockeyContestRound { get; set; }
         public DbSet<TableHockeyGame> TableHockeyGame { get; set; }
         public DbSet<TableHockeyPlayer> TableHockeyPlayer { get; set; }
-        public DbSet<Setting> Settings { get; set; }
-        public DbSet<TableHockeyContestPlayer> TableHockeyContestPlayers { get; set; }
-        public DbSet<TableHockeyContestRound> TableHockeyContestRounds { get; set; }
-        public DbSet<TableHockeyClub> TableHockeyClubs { get; set; }
-        public DbSet<TableHockeyContest> TableHockeyContests { get; set; }
     }
 }

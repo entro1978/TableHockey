@@ -78,7 +78,7 @@ namespace TableHockey.uc
                 CheckBox currentHasSuddenDeath = (CheckBox)this.GridViewEndGames.Rows[iCount].FindControl("CheckBoxSuddenDeath");
                 int m_nCurrentGameId = Convert.ToInt32(this.GridViewEndGames.Rows[iCount].Cells[0].Text);
                 var m_currentVmGame = m_vmRound.m_vmGames.Find(g => g.GameId == m_nCurrentGameId);
-                var m_currentGame = m_round.TableHockeyGames.FirstOrDefault(g => g.GameId == m_nCurrentGameId);
+                var m_currentGame = m_round.TableHockeyGame.FirstOrDefault(g => g.GameId == m_nCurrentGameId);
                 int m_nHomeScore = -1;
                 bool m_bParseHomeScoreOk = int.TryParse(currentHomeScore.Text, out m_nHomeScore);
                 if (!m_bParseHomeScoreOk)
@@ -175,7 +175,7 @@ namespace TableHockey.uc
             {
                 //Get players.
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
+                                          join cp in context.TableHockeyContestPlayer on p.PlayerId equals cp.PlayerId
                                           where cp.ContestId == i_nContestId
                                           select new { Value = p.PlayerId, Text = p.FirstName + " " + p.LastName };
 
@@ -192,7 +192,7 @@ namespace TableHockey.uc
             m_vmRound.m_vmFirstGame[0].HomePlayerId = i_nPlayerId;
             foreach (GameViewModel m_gvm in m_vmRound.m_vmGames)
                 m_gvm.HomePlayerId = i_nPlayerId;
-            foreach (TableHockeyGame m_game in m_round.TableHockeyGames)
+            foreach (TableHockeyGame m_game in m_round.TableHockeyGame)
             {
                 m_game.HomePlayerId = i_nPlayerId;
             }
@@ -203,7 +203,7 @@ namespace TableHockey.uc
             m_vmRound.m_vmFirstGame[0].AwayPlayerId = i_nPlayerId;
             foreach (GameViewModel m_gvm in m_vmRound.m_vmGames)
                 m_gvm.AwayPlayerId = i_nPlayerId;
-            foreach (TableHockeyGame m_game in m_round.TableHockeyGames)
+            foreach (TableHockeyGame m_game in m_round.TableHockeyGame)
             {
                 m_game.AwayPlayerId = i_nPlayerId;
             }

@@ -16,10 +16,10 @@ namespace TableHockeyData
     {
         public TableHockeyPlayer()
         {
+            this.TableHockeyContestPlayer = new HashSet<TableHockeyContestPlayer>();
             this.TableHockeyGame = new HashSet<TableHockeyGame>();
             this.TableHockeyGame1 = new HashSet<TableHockeyGame>();
-            this.TableHockeyContestPlayers = new HashSet<TableHockeyContestPlayer>();
-            this.TableHockeyGames2 = new HashSet<TableHockeyGame>();
+            this.TableHockeyGame2 = new HashSet<TableHockeyGame>();
         }
     
         public int PlayerId { get; set; }
@@ -31,9 +31,9 @@ namespace TableHockeyData
         public Nullable<System.Guid> RegisteredByUserId { get; set; }
         public int isHistoric { get; set; }
     
+        public virtual ICollection<TableHockeyContestPlayer> TableHockeyContestPlayer { get; set; }
         public virtual ICollection<TableHockeyGame> TableHockeyGame { get; set; }
         public virtual ICollection<TableHockeyGame> TableHockeyGame1 { get; set; }
-        public virtual ICollection<TableHockeyContestPlayer> TableHockeyContestPlayers { get; set; }
-        public virtual ICollection<TableHockeyGame> TableHockeyGames2 { get; set; }
+        public virtual ICollection<TableHockeyGame> TableHockeyGame2 { get; set; }
     }
 }

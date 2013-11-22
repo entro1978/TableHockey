@@ -26,7 +26,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 DateTime m_dDateLimit = DateTime.Today.AddDays(-7);  //TODO:  Setting?!
-                m_lstTableHockeyContest = (from c in context.TableHockeyContests
+                m_lstTableHockeyContest = (from c in context.TableHockeyContest
                                            where ((c.ContestDateClosed.Value.CompareTo(m_dDateLimit) > 0) && c.isPubliclyVisible)
                                            select c).ToList();
             }

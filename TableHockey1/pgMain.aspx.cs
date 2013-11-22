@@ -22,7 +22,7 @@ namespace TableHockey
 
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                var query = from c in context.TableHockeyContests
+                var query = from c in context.TableHockeyContest
                             where c.OwnerUserId == m_providerUserKey
                             select new { c.ContestId, c.ContestName, c.ContestDescription, c.ContestLocation, c.ContestDateOpened, c.ContestDateClosed };
                 this.GridViewContests.DataSource = query.ToList();
@@ -30,7 +30,7 @@ namespace TableHockey
                 divContests.Visible = (query.Count() > 0);
                 divContestsHeader.Visible = (query.Count() > 0);
                 var playerQuery = from p in context.TableHockeyPlayer
-                                  join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
+                                  join c in context.TableHockeyClub on p.ClubId equals c.ClubId
                                   select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary, p.RegisteredByUserId, c.ClubId, p.isHistoric };
 
                 this.GridViewPlayers.DataSource = playerQuery.ToList().Where(p => p.PlayerId >= 0).Where(p => p.isHistoric != 1);

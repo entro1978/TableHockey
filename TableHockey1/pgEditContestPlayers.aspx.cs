@@ -19,8 +19,8 @@ namespace TableHockey
             {
 
                 var availablePlayersQuery = from p in context.TableHockeyPlayer
-                                            join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
-                                            where !(from cp in context.TableHockeyContestPlayers
+                                            join c in context.TableHockeyClub on p.ClubId equals c.ClubId
+                                            where !(from cp in context.TableHockeyContestPlayer
                                                     where cp.ContestId == i_nContestId
                                                     select cp.PlayerId).Contains(p.PlayerId)
                                             select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary, p.isHistoric };
@@ -35,8 +35,8 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join c in context.TableHockeyClubs on p.ClubId equals c.ClubId
-                                          join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
+                                          join c in context.TableHockeyClub on p.ClubId equals c.ClubId
+                                          join cp in context.TableHockeyContestPlayer on p.PlayerId equals cp.PlayerId
                                           where (cp.ContestId == i_nContestId)
                                           select new { p.PlayerId, p.FirstName, p.LastName, p.BirthDate, c.ClubName, p.PlayerBinary };
 
@@ -50,7 +50,7 @@ namespace TableHockey
         {
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                TableHockeyContest m_contest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_contest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
                 ViewModels.ContestViewModel m_contestViewModel = new ViewModels.ContestViewModel(m_contest);
                 LabelContestHeader.Text = m_contestViewModel.ContestHeader;
                 LabelContestDescription.Text = m_contestViewModel.ContestDescription;
@@ -92,7 +92,7 @@ namespace TableHockey
                     m_contestPlayer.ContestId = m_nContestId;
                     m_contestPlayer.PlayerId = m_nPlayerId;
                     m_contestPlayer.isDummyContestPlayer = false;
-                    context.TableHockeyContestPlayers.Add(m_contestPlayer);
+                    context.TableHockeyContestPlayer.Add(m_contestPlayer);
                 }
                 context.SaveChanges();
             }
@@ -111,7 +111,7 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 TableHockeyGame m_tableHockeyGame = context.TableHockeyGame.FirstOrDefault(c => ((c.HomePlayerId == i_nPlayerId) || (c.AwayPlayerId == i_nPlayerId)) && (c.ContestId == m_nContestId));
-                TableHockeyContest m_tableHockeyContest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_tableHockeyContest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
                 return ((m_tableHockeyGame == null) && (m_tableHockeyContest.ContestDateClosed.Equals(DateTime.Parse("1900-01-01"))));
             }
         }
@@ -129,8 +129,8 @@ namespace TableHockey
                 {
                     if (isPlayerOKToRemoveFromContest(m_nPlayerId, m_nContestId))
                     {
-                        TableHockeyContestPlayer m_contestPlayer = context.TableHockeyContestPlayers.First(c => (c.PlayerId == m_nPlayerId) && (c.ContestId == m_nContestId));
-                        context.TableHockeyContestPlayers.Remove(m_contestPlayer);
+                        TableHockeyContestPlayer m_contestPlayer = context.TableHockeyContestPlayer.First(c => (c.PlayerId == m_nPlayerId) && (c.ContestId == m_nContestId));
+                        context.TableHockeyContestPlayer.Remove(m_contestPlayer);
                     }
                 }
                 context.SaveChanges();
@@ -153,18 +153,18 @@ namespace TableHockey
 
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                int m_nNumberOfPlayers = context.TableHockeyContestPlayers.Where(c => (c.PlayerId != -1) && (c.ContestId == m_nContestId)).Count();
+                int m_nNumberOfPlayers = context.TableHockeyContestPlayer.Where(c => (c.PlayerId != -1) && (c.ContestId == m_nContestId)).Count();
                 //If odd number of players, add extra dummy player (if none exists, shouldn't happen). This is a temporary fix that may be altered in the future. 120507.
                 if (PageUtility.isOdd(m_nNumberOfPlayers))
                 {
-                    TableHockeyContestPlayer m_existingDummyPlayer = context.TableHockeyContestPlayers.FirstOrDefault(c => (c.PlayerId == -1) && (c.ContestId == m_nContestId));
+                    TableHockeyContestPlayer m_existingDummyPlayer = context.TableHockeyContestPlayer.FirstOrDefault(c => (c.PlayerId == -1) && (c.ContestId == m_nContestId));
                     if (m_existingDummyPlayer == null)
                     {
                         TableHockeyContestPlayer m_dummyPlayer = new TableHockeyContestPlayer();
                         m_dummyPlayer.ContestId = m_nContestId;
                         m_dummyPlayer.PlayerId = -1;
                         m_dummyPlayer.isDummyContestPlayer = true;
-                        context.TableHockeyContestPlayers.Add(m_dummyPlayer);
+                        context.TableHockeyContestPlayer.Add(m_dummyPlayer);
                     }                  
                     context.SaveChanges();
                 }

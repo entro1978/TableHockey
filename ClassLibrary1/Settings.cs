@@ -12,15 +12,13 @@ namespace TableHockeyData
     using System;
     using System.Collections.Generic;
     
-    public partial class TableHockeyContestPlayer
+    public partial class Settings
     {
-        public int TableHockeyContestPlayerId { get; set; }
-        public int ContestId { get; set; }
-        public int PlayerId { get; set; }
-        public bool isDummyContestPlayer { get; set; }
-        public Nullable<int> FinalPreviousStanding { get; set; }
-    
-        public virtual TableHockeyContest TableHockeyContest { get; set; }
-        public virtual TableHockeyPlayer TableHockeyPlayer { get; set; }
+        public int SettingId { get; set; }
+        public string ValueString { get; set; }
+        public Nullable<int> ValueInt { get; set; }
+        public byte[] ValueBinary { get; set; }
+        public Nullable<bool> ValueBool { get; set; }
+        public string SettingDescription { get; set; }
     }
 }

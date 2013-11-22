@@ -14,6 +14,13 @@ namespace TableHockeyData
     
     public partial class TableHockeyContest
     {
+        public TableHockeyContest()
+        {
+            this.TableHockeyContestPlayer = new HashSet<TableHockeyContestPlayer>();
+            this.TableHockeyContestRound = new HashSet<TableHockeyContestRound>();
+            this.TableHockeyGame = new HashSet<TableHockeyGame>();
+        }
+    
         public int ContestId { get; set; }
         public string ContestName { get; set; }
         public System.DateTime ContestDateOpened { get; set; }
@@ -32,5 +39,9 @@ namespace TableHockeyData
         public Nullable<System.Guid> OwnerUserId { get; set; }
         public Nullable<int> EndGameForContestId { get; set; }
         public bool isPubliclyVisible { get; set; }
+    
+        public virtual ICollection<TableHockeyContestPlayer> TableHockeyContestPlayer { get; set; }
+        public virtual ICollection<TableHockeyContestRound> TableHockeyContestRound { get; set; }
+        public virtual ICollection<TableHockeyGame> TableHockeyGame { get; set; }
     }
 }

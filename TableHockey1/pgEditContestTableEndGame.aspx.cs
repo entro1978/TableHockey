@@ -42,7 +42,7 @@ namespace TableHockey
                     //Get current contest
                     using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                     {
-                        m_currentContest = context.TableHockeyContests.FirstOrDefault(i => i.ContestId == m_nContestId);
+                        m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == m_nContestId);
                     }
 
                     if (m_currentContest.EndGameForContestId == null)
@@ -102,12 +102,12 @@ namespace TableHockey
                 TableHockeyContestRound m_round = (TableHockeyContestRound)e.Item.DataItem;
                 for (int m_nCurrentTableNumber = 1; m_nCurrentTableNumber <= m_nMaxNumberOfConcurrentGames; m_nCurrentTableNumber++)
                 {
-                    List<TableHockeyGame> m_gamesOnCurrentTable = m_round.TableHockeyGames.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
+                    List<TableHockeyGame> m_gamesOnCurrentTable = m_round.TableHockeyGame.Where(g => g.TableNumber == m_nCurrentTableNumber).ToList();
                     if (m_gamesOnCurrentTable.Count > 0)
                     {
                         TableHockeyContestRound m_roundGame = new TableHockeyContestRound();
                         Mapper.Map(m_round, m_roundGame);
-                        m_roundGame.TableHockeyGames = m_gamesOnCurrentTable;
+                        m_roundGame.TableHockeyGame = m_gamesOnCurrentTable;
                         uc.ucEndGameSeries uc = (uc.ucEndGameSeries)LoadControl("~/uc/ucEndGameSeries.ascx");
                         uc.InitControl(m_roundGame);
                         uc.m_nTableNumber = m_nCurrentTableNumber;
@@ -128,7 +128,7 @@ namespace TableHockey
 
                 if (Session["pgEditContestTableEndGame.m_rounds"] == null)
                 {
-                    m_rounds = (from r in context.TableHockeyContestRounds
+                    m_rounds = (from r in context.TableHockeyContestRound
                                 where ((r.ContestId == i_nContestId) && (r.RoundNumber == i_nCurrentRoundNumber))
                                 select r).ToList();
                     Session["pgEditContestTableEndGame.m_rounds"] = m_rounds;
@@ -141,9 +141,9 @@ namespace TableHockey
                 if (Session["ucEndGameSeries.m_round"] != null)
                 {
                     TableHockeyContestRound m_enteredRound = (TableHockeyContestRound)Session["ucEndGameSeries.m_round"];
-                    int m_nEnteredTableNumber = m_enteredRound.TableHockeyGames.FirstOrDefault().TableNumber;
-                    var m_gamesOnCurrentTable = m_enteredRound.TableHockeyGames.Where(g => g.TableNumber == m_nEnteredTableNumber);
-                    Mapper.Map(m_gamesOnCurrentTable, m_rounds[0].TableHockeyGames.Where(g => g.TableNumber == m_nEnteredTableNumber));
+                    int m_nEnteredTableNumber = m_enteredRound.TableHockeyGame.FirstOrDefault().TableNumber;
+                    var m_gamesOnCurrentTable = m_enteredRound.TableHockeyGame.Where(g => g.TableNumber == m_nEnteredTableNumber);
+                    Mapper.Map(m_gamesOnCurrentTable, m_rounds[0].TableHockeyGame.Where(g => g.TableNumber == m_nEnteredTableNumber));
                     Session["ucEndGameSeries.m_round"] = m_rounds[0];
                 }
 
@@ -170,7 +170,7 @@ namespace TableHockey
             {
                 //Get players.
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
+                                          join cp in context.TableHockeyContestPlayer on p.PlayerId equals cp.PlayerId
                                           where cp.ContestId == i_nContestId
                                           select new { p.PlayerId };
 
@@ -224,7 +224,7 @@ namespace TableHockey
             //Get game list for end game. Always add full number of possible games per round. If a match series ends prematurely, games are returned as "scoreless".
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                var roundsQuery = from r in context.TableHockeyContestRounds
+                var roundsQuery = from r in context.TableHockeyContestRound
                                   where r.ContestId == i_contest.ContestId
                                   select r;
 
@@ -268,7 +268,7 @@ namespace TableHockey
                                  select g;
 
                 //Get contest players.
-                var playersQuery = from p in context.TableHockeyContestPlayers
+                var playersQuery = from p in context.TableHockeyContestPlayer
                                    where p.ContestId == i_nContestId
                                    select p;
 
@@ -402,7 +402,7 @@ namespace TableHockey
             TableHockeyContestRound m_currentRound = m_enteredRounds.Where(g => g.RoundNumber == m_nCurrentRoundNumber).FirstOrDefault();
             //If everything validates, save results to database and display next round.
             m_dictPlayersToNextRound = TableHockeyContestHandler.getPlayersToNextRound(m_currentRound, m_nGamesPerRound);
-            int m_nPlayersToNextRound = m_enteredRounds[0].TableHockeyGames.Count / m_nGamesPerRound;
+            int m_nPlayersToNextRound = m_enteredRounds[0].TableHockeyGame.Count / m_nGamesPerRound;
             return (m_dictPlayersToNextRound.Count == m_nPlayersToNextRound);
            
         }

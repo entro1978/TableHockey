@@ -29,7 +29,7 @@ namespace TableHockey
             m_vmGames = new List<GameViewModel>();
             m_vmFirstGame = new List<GameViewModel>();
             int i = 0;
-            foreach (TableHockeyGame m_game in i_round.TableHockeyGames)
+            foreach (TableHockeyGame m_game in i_round.TableHockeyGame)
             {
                 if((m_game.HomePlayerId > 0) && (m_game.AwayPlayerId > 0))
                 {

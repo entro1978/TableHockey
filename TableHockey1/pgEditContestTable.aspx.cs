@@ -37,11 +37,11 @@ namespace TableHockey
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
                 //Get contest details.
-                TableHockeyContest m_contest = context.TableHockeyContests.First(c => c.ContestId == i_nContestId);
+                TableHockeyContest m_contest = context.TableHockeyContest.First(c => c.ContestId == i_nContestId);
                 int m_nNumberOfRepetitions = m_contest.numberOfRounds;
                 //Get players.
                 var contestPlayersQuery = from p in context.TableHockeyPlayer
-                                          join cp in context.TableHockeyContestPlayers on p.PlayerId equals cp.PlayerId
+                                          join cp in context.TableHockeyContestPlayer on p.PlayerId equals cp.PlayerId
                                           where cp.ContestId == i_nContestId                                
                                           select new { p.PlayerId };
 
@@ -90,7 +90,7 @@ namespace TableHockey
         {
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                var roundsQuery = from r in context.TableHockeyContestRounds
+                var roundsQuery = from r in context.TableHockeyContestRound
                                   where r.ContestId == i_contest.ContestId
                                   select r;
 
@@ -134,7 +134,7 @@ namespace TableHockey
                                  select g;
 
                 //Get contest players.
-                var playersQuery = from p in context.TableHockeyContestPlayers
+                var playersQuery = from p in context.TableHockeyContestPlayer
                                    where p.ContestId == i_nContestId
                                    select p;
 
@@ -187,7 +187,7 @@ namespace TableHockey
                     //Get current contest
                     using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                     {
-                        m_currentContest = context.TableHockeyContests.FirstOrDefault(i => i.ContestId == m_nContestId);
+                        m_currentContest = context.TableHockeyContest.FirstOrDefault(i => i.ContestId == m_nContestId);
                     }
                     Session["pgEditContestTable.m_currentContest"] = m_currentContest;
                     //Find or regenerate contest rounds.
@@ -233,7 +233,7 @@ namespace TableHockey
             bool isFinalRound = false;
             using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
             {
-                TableHockeyContestRound m_round = context.TableHockeyContestRounds.FirstOrDefault(r => (r.ContestId == i_nContestId) && (r.RoundNumber == i_nCurrentRoundNumber));
+                TableHockeyContestRound m_round = context.TableHockeyContestRound.FirstOrDefault(r => (r.ContestId == i_nContestId) && (r.RoundNumber == i_nCurrentRoundNumber));
                 this.ucContestRound1.InitControl(m_round);
                 this.divPreviousRound.Visible = (!m_round.isFirstRound);
                 isFinalRound = m_round.isFinalRound;
@@ -365,10 +365,10 @@ namespace TableHockey
                 using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
                     //Create new end game only if no previous exists.
-                    var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                    var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                     if (queryExistingEndGame == null)
                     {
-                        context.TableHockeyContests.Add(m_newEndGameContest);
+                        context.TableHockeyContest.Add(m_newEndGameContest);
                         context.SaveChanges();
                     }          
                 }
@@ -377,11 +377,11 @@ namespace TableHockey
                 {
                     //Add new players to end game if none exist.
 
-                     var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                     var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                      if (queryExistingEndGame != null)
                      {
                          m_nEndGameContestId = queryExistingEndGame.ContestId;
-                         var queryExistingPlayers = context.TableHockeyContestPlayers.FirstOrDefault(p => p.ContestId == m_nEndGameContestId);
+                         var queryExistingPlayers = context.TableHockeyContestPlayer.FirstOrDefault(p => p.ContestId == m_nEndGameContestId);
                          //Only add players if none exist.
                          if (queryExistingPlayers == null)
                          {
@@ -392,7 +392,7 @@ namespace TableHockey
                                  m_contestPlayer.PlayerId = kvp.Value;
                                  m_contestPlayer.FinalPreviousStanding = 1 + kvp.Key;
                                  m_contestPlayer.isDummyContestPlayer = false;
-                                 context.TableHockeyContestPlayers.Add(m_contestPlayer);
+                                 context.TableHockeyContestPlayer.Add(m_contestPlayer);
                              }
                              context.SaveChanges();
                          }             
@@ -401,7 +401,7 @@ namespace TableHockey
                 using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
                     //Create new end game only if no previous exists.
-                    var queryExistingEndGame = context.TableHockeyContests.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
+                    var queryExistingEndGame = context.TableHockeyContest.FirstOrDefault(c => c.EndGameForContestId == m_nContestId);
                     if (queryExistingEndGame != null)
                     {
                         TableHockeyContest m_endGame = (TableHockeyContest)queryExistingEndGame;

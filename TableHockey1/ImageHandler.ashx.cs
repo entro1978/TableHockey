@@ -67,7 +67,7 @@ namespace TableHockey
             {
                 using (var context = new TableHockeyData.UHSSWEB_DEVEntities())
                 {
-                    var querySingleClub = context.TableHockeyClubs.First(c => c.ClubId == id);
+                    var querySingleClub = context.TableHockeyClub.First(c => c.ClubId == id);
 
                     byte[] m_picture = (byte[])querySingleClub.ClubBinary;
                     if ((m_picture != null) && (m_picture.Length > 0))
